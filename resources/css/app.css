@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.menu-group {
+  @apply flex flex-col gap-3 mb-5;
+}
+.group-name {
+  @apply text-lg text-blue-400 font-bold;
+}
+.group-items {
+ @apply  ml-10 text-blue-400 pb-2 border-b border-blue-200
+}
