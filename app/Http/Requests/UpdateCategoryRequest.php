@@ -19,7 +19,7 @@ class UpdateCategoryRequest extends FormRequest
             'id' => 'required|exists:categories,id',
             'name' => [
                 'required',
-                Rule::unique('categories,name')->ignore($request->id)
+                Rule::unique('categories')->ignore($request->id)
             ],
             'description' => 'required'
         ];
