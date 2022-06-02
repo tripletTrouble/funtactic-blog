@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {{-- Tailwind CSS --}}
-    <link rel="stylesheet" href="{{ asset('public/css/app.css?v=1.0.4') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/app.css?v=1.0.10') }}">
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
-    <title>{{ config('app.name') }} - {{ $site_tagline ?? "Let's write something great!" }}</title>
+    {{-- SweetAlert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>{{ config('app.name') }} - {{ $title ?? "Let's write something great!" }}</title>
 </head>
 
 <style>
@@ -32,7 +35,6 @@
             transform: translateX(0)
         }
     }
-
 </style>
 
 <body>
@@ -52,11 +54,14 @@
         <div class="flex flex-col gap-3 w-3/4 p-10 bg-slate-100 dark:bg-gray-700 rounded-l-xl" id="menu-list"
             tabindex="0">
             <div class="menu-group">
+                <a class="group-name pb-2 border-b border-blue-200 w-full text-left" href="{{ url('/dashboard') }}"><i class="bi bi-house-door-fill mr-1.5"></i> Dashboard</a>
+            </div>
+            <div class="menu-group">
                 <p class="group-name"><i class="bi bi-file-earmark-post mr-2"></i> Artikel</p>
-                <a class="group-items" href="#"><i class="bi bi-plus-lg mr-1.5"></i> Buat
+                <a class="group-items" href="{{ url('/new-article') }}"><i class="bi bi-plus-lg mr-1.5"></i> Buat
                     artikel</a>
-                <a class="group-items" href="#"><i class="bi bi-card-checklist mr-1.5"></i> Kelola artikel</a>
-                <a class="group-items" href="#"><i class="bi bi-collection mr-1.5"></i> Kelola kategori</a>
+                <a class="group-items" href="{{ url('/articles') }}"><i class="bi bi-card-checklist mr-1.5"></i> Kelola artikel</a>
+                <a class="group-items" href="{{ url('/categories') }}"><i class="bi bi-collection mr-1.5"></i> Kelola kategori</a>
             </div>
             <div class="menu-group">
                 <p class="group-name"><i class="bi bi-globe2 mr-2"></i> Situs</p>
@@ -72,7 +77,7 @@
                 <form action="{{ url('/logout') }}" method="post">
                     @csrf
                     <button class="group-name pb-2 border-b border-blue-200 w-full text-left"><i
-                            class="bi  bi-box-arrow-right mr-2"></i>
+                            class="bi bi-box-arrow-right mr-2"></i>
                         Log Out</button>
                 </form>
             </div>
@@ -92,16 +97,10 @@
             menu.classList.replace('hidden', 'flex');
         })
 
-        menuBtn.addEventListener('focusout', function(event) {
-            const menuList = document.getElementById('menu-list');
-            if (event.relatedTarget != menuList) {
-                menu.classList.replace('flex', 'hidden');
-            }
-        })
-
         menu.addEventListener('click', function(event) {
             const menuGroup = document.getElementsByClassName('menu-group')
-            if (event.target == menu) {
+            console.log(event.target)
+            if (event.target != menuList) {
                 menu.classList.replace('flex', 'hidden');
             }
         })

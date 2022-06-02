@@ -21,13 +21,6 @@ return new class extends Migration
             $table->text('description');
             $table->timestamps();
         });
-
-        DB::table('categories')->insert ([
-            'name' => 'Uncategorized',
-            'description' => 'Article that does not have category.',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
     }
 
     /**

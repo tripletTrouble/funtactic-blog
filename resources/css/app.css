@@ -5,9 +5,45 @@
 .menu-group {
   @apply flex flex-col gap-3 mb-5;
 }
+
 .group-name {
   @apply text-lg text-blue-400 font-bold;
 }
+
 .group-items {
- @apply  ml-10 text-blue-400 pb-2 border-b border-blue-200
+  @apply ml-10 text-blue-400 pb-2 border-b border-blue-200
+}
+
+.form-control {
+  @apply p-2 border border-blue-300 bg-transparent rounded-lg placeholder:text-blue-200 placeholder:opacity-90
+}
+
+.label-flex {
+  @apply text-sm text-blue-300 flex flex-col gap-2 mb-3
+}
+
+/* Style for article section */
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+ol {
+  list-style: decimal;
+  padding-left: 20px
+}
+
+blockquote {
+  border-left: 5px solid black;
+  padding-left: 15px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-style: italic;
 }

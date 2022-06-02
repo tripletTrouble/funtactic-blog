@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('thumbnail_url');
             $table->string('thumbnail_source');
             $table->longText('body');
+            $table->string('tags')->nullable();
             $table->timestamp('published_at');
             $table->timestamps();
         });
