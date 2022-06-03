@@ -3,16 +3,6 @@
 @section('content')
     <main class="w-11/12 mx-auto mb-7">
         <p class="text-xl font-bold text-center text-blue-300 mb-5">Daftar Artikelmu</p>
-        @if ($errors->any())
-            <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
-                <p class="text-red-400 mb-2 font-bold text-sm">Data gagal disimpan! </p>
-                <ul class="list-disc mx-3 text-red-400 text-sm">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         @if (session('success'))
             <div class="border p-5 border-blue-400 rounded-lg mb-5">
                 <p class="text-blue-400 text-sm">{{ session('success') }}</p>

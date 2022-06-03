@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\DeleteCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Interfaces\CategoryRepositoryInterface;
-use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -38,7 +39,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $this->categoryRepository->storeCategory($request->except(['_token']));
-        return redirect()->to(url('/categories'));
+        return redirect()->to(url('/categories'))->with('success', 'Kategori telah dibuat!');
     }
 
     /**
@@ -62,17 +63,18 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request)
     {
         $this->categoryRepository->updateCategory($request->except(['_token']));
-        return redirect()->to(url('/categories'));
+        return redirect()->to(url('/categories'))->with('success', 'Kategori telah diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Http\Requests\DeleteCategoryRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(DeleteCategoryRequest $request)
     {
-        //
+        $this->categoryRepository->deleteCategory($request->id);
+        return redirect()->to(url('/categories'))->with('success', 'Kategori telah dihapus!');
     }
 }

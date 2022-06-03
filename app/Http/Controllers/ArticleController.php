@@ -94,7 +94,7 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request)
     {
         $this->articleRepository->updateArticle($request->except(['_token']));
-        return redirect()->to(url('/articles'));
+        return redirect()->to(url('/articles'))->with('success', 'Artikel telah diperbarui!');
     }
 
     /**
