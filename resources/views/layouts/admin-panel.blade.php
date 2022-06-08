@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {{-- Tailwind CSS --}}
-    <link rel="stylesheet" href="{{ asset('public/css/app.css?v=1.0.10') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/app.css?v=1.0.14') }}">
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
@@ -65,7 +65,7 @@
             </div>
             <div class="menu-group">
                 <p class="group-name"><i class="bi bi-globe2 mr-2"></i> Situs</p>
-                <a class="group-items" href="#"><i class="bi bi-card-list mr-1.5"></i> Identitas situs</a>
+                <a class="group-items" href="{{ url('/site-settings') }}"><i class="bi bi-card-list mr-1.5"></i> Identitas situs</a>
                 <a class="group-items" href="#"><i class="bi bi-grid mr-1.5"></i> Kelola menu utama</a>
             </div>
             <div class="menu-group">

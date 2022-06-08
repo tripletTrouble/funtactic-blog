@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SettingController;
 use App\Models\Article;
 
 /*
@@ -38,4 +39,9 @@ Route::controller(CategoryController::class)->group(function() {
     Route::post('/categories', 'store');
     Route::put('/categories', 'update');
     Route::delete('/categories', 'destroy');
+});
+
+Route::controller(SettingController::class)->group(function() {
+    Route::get('site-settings', 'siteSettings');
+    Route::put('settings', 'update');
 });
