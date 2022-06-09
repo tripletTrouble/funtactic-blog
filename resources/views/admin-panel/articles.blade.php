@@ -1,7 +1,7 @@
 @extends('layouts.admin-panel')
 
 @section('content')
-    <main class="w-11/12 mx-auto mb-7">
+    <div class="w-11/12 mx-auto mb-7">
         <p class="text-xl font-bold text-center text-blue-300 mb-5">Daftar Artikelmu</p>
         @if (session('success'))
             <div class="border p-5 border-blue-400 rounded-lg mb-5">
@@ -38,6 +38,6 @@
             @endforeach
           </tbody>
         </table>
-    </main>
+    </div>
 
 @endsection

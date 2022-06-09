@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateSettingRequest;
+use App\Interfaces\CategoryRepositoryInterface;
 use App\Interfaces\SettingRespositoryInterface;
 
 class SettingController extends Controller
 {
     private SettingRespositoryInterface $settingRespository;
+    private CategoryRepositoryInterface $categoryRepository;
 
-    public function __construct(SettingRespositoryInterface $settingRespository)
+    public function __construct(SettingRespositoryInterface $settingRespository, CategoryRepositoryInterface $categoryRepository)
     {
         $this->settingRespository = $settingRespository;
+        $this->categoryRepository = $categoryRepository;
     }
     /**
      * Display site settings form
@@ -28,6 +31,19 @@ class SettingController extends Controller
     }
 
     /**
+     * Display menu settings form
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function menuSettings()
+    {
+        return view('admin-panel.menu-settings', [
+            'categories' => $this->categoryRepository->getCategories(),
+            'settings' => $this->settingRespository->getSettings()->only([3, 4, 5, 6])
+        ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateSettingRequest  $request
@@ -36,6 +52,6 @@ class SettingController extends Controller
     public function update(UpdateSettingRequest $request)
     {
         $this->settingRespository->updateSetting($request->except(['_token', '_method']));
-        return redirect()->back()->with('success', 'Data situs berhasil diperbarui');
+        return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui!');
     }
 }

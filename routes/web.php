@@ -43,5 +43,6 @@ Route::controller(CategoryController::class)->group(function() {
 
 Route::controller(SettingController::class)->group(function() {
     Route::get('site-settings', 'siteSettings');
+    Route::get('menu-settings', 'menuSettings');
     Route::put('settings', 'update');
 });

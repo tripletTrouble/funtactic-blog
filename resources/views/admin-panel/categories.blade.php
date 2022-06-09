@@ -1,7 +1,7 @@
 @extends('layouts.admin-panel')
 
 @section('content')
-    <main class="w-11/12 mx-auto mb-7">
+    <div class="w-11/12 mx-auto mb-7">
         <p class="text-xl font-bold text-center text-blue-300 mb-5">Daftar Kategori</p>
         @if ($errors->any())
             <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
@@ -100,7 +100,7 @@
                 </form>
             </div>
         </div>
-    </main>
+    </div>
     <script src="{{ asset('public/js/app.js') }}"></script>
     <script>
         function getCategoryById(id) {

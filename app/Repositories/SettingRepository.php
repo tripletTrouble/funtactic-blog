@@ -15,7 +15,8 @@ class SettingRepository implements SettingRespositoryInterface
 
     function updateSetting($data): bool
     {
-        foreach ($data as $key => $value) {
+        $validData = collect($data)->unique();
+        foreach ($validData as $key => $value) {
             Setting::where('key', $key)->update([
                 'value' => $value
             ]);
