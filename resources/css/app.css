@@ -11,15 +11,15 @@
 }
 
 .group-items {
-  @apply ml-10 text-blue-400 pb-2 border-b border-blue-200
+  @apply ml-10 text-blue-400 pb-2 border-b border-blue-200;
 }
 
 .form-control {
-  @apply p-2 border border-blue-300 bg-transparent rounded-lg placeholder:text-blue-200 placeholder:opacity-90
+  @apply p-2 border border-blue-300 bg-transparent rounded-lg placeholder:text-blue-200 placeholder:opacity-90;
 }
 
 .label-flex {
-  @apply text-sm text-blue-300 flex flex-col gap-2 mb-3
+  @apply text-sm text-blue-300 flex flex-col gap-2 mb-3;
 }
 
 /* Style for article section */

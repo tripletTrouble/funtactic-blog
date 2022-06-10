@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserProfileController;
 use App\Models\Article;
 
 /*
@@ -45,4 +46,9 @@ Route::controller(SettingController::class)->group(function() {
     Route::get('site-settings', 'siteSettings');
     Route::get('menu-settings', 'menuSettings');
     Route::put('settings', 'update');
+});
+
+Route::controller(UserProfileController::class)->group(function () {
+    Route::get('edit-profile', 'edit');
+    Route::put('user-profiles', 'update');
 });

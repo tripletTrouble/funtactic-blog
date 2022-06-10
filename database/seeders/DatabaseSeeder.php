@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\SettingSeeder;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\UserProfileSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -20,7 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             UserSeeder::class,
-            SettingSeeder::class
+            SettingSeeder::class,
+            UserProfileSeeder::class,
         ]);
     }
 }
