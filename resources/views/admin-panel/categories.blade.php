@@ -1,7 +1,7 @@
 @extends('layouts.admin-panel')
 
 @section('content')
-    <div class="w-11/12 mx-auto mb-7">
+    <div class="dashboard-content">
         <p class="text-xl font-bold text-center text-blue-300 mb-5">Daftar Kategori</p>
         @if ($errors->any())
             <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
@@ -36,15 +36,15 @@
                         <td class="p-2">{{ $category['name'] }}</td>
                         <td class="p-2">{{ $category['description'] }}</td>
                         <td class="p-2 w-max">
-                            <div class="flex flex-col items-center my-auto">
-                                <button class="p-1 bg-yellow-300 text-white rounded-lg mb-2 flex text-xs"
+                            <div class="flex flex-col md:flex-row items-center my-auto">
+                                <button class="p-1 bg-yellow-300 text-white rounded-lg mb-2 md:mb-0 md:mr-2 flex text-sm"
                                     onclick="showEditForm({{ $category['id'] }})"><i class="bi bi-pencil mr-1"></i>
                                     Ubah</button>
                                 <form class="delete-form" action="{{ url('/categories') }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="id" value="{{ $category['id'] }}">
-                                    <button class="text-white bg-red-400 p-1 rounded-lg flex text-xs" type="submit"><i
+                                    <button class="text-white bg-red-400 p-1 rounded-lg flex text-sm" type="submit"><i
                                             class="bi bi-trash mr-1"></i> Hapus</button>
                                 </form>
                             </div>

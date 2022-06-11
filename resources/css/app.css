@@ -22,6 +22,10 @@
   @apply text-sm text-blue-300 flex flex-col gap-2 mb-3;
 }
 
+.dashboard-content {
+  @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-3/4 mx-auto mb-7 xl:pt-3 xl:px-20 max-h-screen overflow-scroll;
+}
+
 /* Style for article section */
 h1 {
   font-size: 20px;

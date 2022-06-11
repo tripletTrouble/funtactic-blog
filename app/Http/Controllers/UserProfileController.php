@@ -24,7 +24,10 @@ class UserProfileController extends Controller
      */
     public function edit(UserProfile $userProfile)
     {
-        return view('admin-panel.user-profile');
+        return view('admin-panel.user-profile', [
+            'personalProfile' => $this->userProfileRepository->getPersonalProfile(1),
+            'socialMediaProfile' => $this->userProfileRepository->getSocialMediaProfile(1)
+        ]);
     }
 
     /**

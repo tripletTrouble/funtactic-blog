@@ -1,7 +1,7 @@
 @extends('layouts.admin-panel')
 
 @section('content')
-    <div class="w-11/12 mx-auto mb-7">
+    <div class="dashboard-content">
         <p class="text-xl font-bold text-center text-blue-300 mb-2">Pengaturan Menu Utama</p>
         <p class="text-xs text-center text-blue-300 mb-5">(Pastikan menu tidak terduplikasi)</p>
         @if ($errors->any())

@@ -5,6 +5,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserProfileController;
+use App\Interfaces\ArticleRepositoryInterface;
+use App\Interfaces\UserServiceInterface;
 use App\Models\Article;
 
 /*
@@ -18,8 +20,11 @@ use App\Models\Article;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (UserServiceInterface $userServiceInterface, ArticleRepositoryInterface $articleRepositoryInterface) {
+    return view('front-page.home', [
+        'owner' => $userServiceInterface->getOwnerInfo(['full_name']),
+        'articles' => $articleRepositoryInterface->getArticles()
+    ]);
 });
 
 Route::get('dashboard', function () {

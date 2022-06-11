@@ -1,7 +1,7 @@
 @extends('layouts.admin-panel')
 
 @section('content')
-    <div class="w-11/12 mx-auto mb-7">
+    <div class="dashboard-content">
         <p class="text-xl font-bold text-center text-blue-300 mb-5">Sunting Artikel</p>
         @if ($errors->any())
             <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
@@ -65,9 +65,9 @@
                 <input class="form-control" type="text" name="tags" id="tags" placeholder="Contoh: crypto, teknologi"
                     value="{{ old('tags') ?? $article['tags'] }}">
             </label>
-            <button class="block w-full bg-emerald-300 text-white font-bold py-2 rounded-lg mt-5" type="submit"><i
-                    class="bi bi-send-fill"></i>
-                Simpan Artikel</button>
+            <button class="block w-full bg-blue-300 text-white font-bold py-2 rounded-lg mt-5" type="submit"><i
+                    class="bi bi-arrow-repeat"></i>
+                Update Artikel</button>
         </form>
     </div>
 

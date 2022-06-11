@@ -1,7 +1,7 @@
 @extends('layouts/admin-panel')
 
 @section('content')
-    <div class="w-11/12 mx-auto mb-7">
+    <div class="dashboard-content">
         <p class="text-xl font-bold text-center text-blue-300 mb-5">Buat Artikel Baru</p>
         @if ($errors->any())
             <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
