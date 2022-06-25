@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {{-- Tailwind CSS --}}
-    <link rel="stylesheet" href="{{ asset('public/css/app.css?v=1.0.002') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?v=1.0.003') }}">
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
@@ -40,14 +40,14 @@
 <body>
     <header class="fixed top-0 right-0 w-screen z-10 xl:hidden">
         <div
-            class="flex justify-between items-center p-3 md:px-5 border-b-2 border-blue-300 bg-slate-100 dark:bg-gray-700">
+            class="flex justify-between items-center p-3 md:px-5 border-b-2 border-indigo-600 bg-slate-100 dark:bg-gray-700">
             <div class="flex items-center" id="brand">
-                <img class="w-8 mr-2" id="brand-image" src="{{ asset('public/img/logo.svg') }}"
+                <img class="w-8 mr-2" id="brand-image" src="{{ asset('img/logo.svg') }}"
                     alt="{{ config('app.name') }}">
-                <p class="font-bold text-blue-300 text-lg leading-tight" id="brand-text">{{ config('app.name') }}</p>
+                <p class="font-bold text-indigo-600 text-lg leading-tight" id="brand-text">{{ config('app.name') }}</p>
             </div>
             <div id="menu-panel">
-                <button class="text-3xl text-blue-300" id="menu-btn"><i class="bi bi-list"></i></button>
+                <button class="text-3xl text-indigo-600" id="menu-btn"><i class="bi bi-list"></i></button>
             </div>
         </div>
     </header>
@@ -91,16 +91,16 @@
         </div>
     </div>
     <main class="mt-20 xl:mt-0 xl:flex xl:h-screen xl:overflow-scroll">
-        <div class="w-1/4 bg-gradient-to-t from-slate-100 rounded-r-xl border-r-4 border-slate-100 hidden xl:flex flex-col items-center p-3"
+        <div class="w-1/4 bg-gradient-to-br via-sky-200 from-slate-50 dark:from-gray-800 dark:to-slate-900 rounded-r-xl border-r-4 border-slate-500 dark:border-slate-100 drop-shadow-2xl hidden xl:flex flex-col items-center p-10"
             id="large-menu">
             <div class="flex items-center mb-7" id="brand">
-                <img class="w-8 mr-2" id="brand-image" src="{{ asset('public/img/logo.svg') }}"
+                <img class="w-8 mr-2" id="brand-image" src="{{ asset('img/logo.svg') }}"
                     alt="{{ config('app.name') }}">
-                <p class="font-bold text-blue-300 text-lg leading-tight" id="brand-text">{{ config('app.name') }}</p>
+                <p class="font-bold text-rose-600 text-lg lg:text-xl 2xl:text-2xl leading-tight" id="brand-text">{{ config('app.name') }}</p>
             </div>
             <div class="flex flex-col gap-3 w-10/12">
                 <div class="menu-group">
-                    <a class="group-name pb-2 border-b border-blue-200 w-full text-left"
+                    <a class="group-name border-b pb-2 border-rose-600"
                         href="{{ url('/dashboard') }}"><i class="bi bi-house-door-fill mr-1.5"></i> Dashboard</a>
                 </div>
                 <div class="menu-group">

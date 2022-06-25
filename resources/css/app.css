@@ -2,30 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.menu-group {
-  @apply flex flex-col gap-3 mb-5;
-}
-
-.group-name {
-  @apply text-lg text-blue-400 font-bold;
-}
-
-.group-items {
-  @apply ml-10 text-blue-400 pb-2 border-b border-blue-200;
-}
-
-.form-control {
-  @apply p-2 border border-blue-300 bg-transparent rounded-lg placeholder:text-blue-200 placeholder:opacity-90;
-}
-
-.label-flex {
-  @apply text-sm text-blue-300 flex flex-col gap-2 mb-3;
-}
-
-.dashboard-content {
-  @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-3/4 mx-auto mb-7 xl:pt-3 xl:px-20 max-h-screen overflow-scroll;
-}
-
 /* Style for article section */
 h1 {
   font-size: 20px;
@@ -50,4 +26,60 @@ blockquote {
   margin-top: 8px;
   margin-bottom: 8px;
   font-style: italic;
+}
+
+@layer components {
+    /* Style for navigation */
+    .menu-group {
+      @apply flex flex-col gap-3 mb-5;
+    }
+
+    .group-name {
+      @apply text-lg text-rose-600 dark:text-rose-500 font-bold;
+    }
+
+    .group-items {
+      @apply ml-10 text-rose-600 dark:text-rose-500 pb-2 border-b border-rose-500;
+    }
+
+
+    /* Style for form elements */
+    .form-col {
+      @apply flex flex-col gap-2 mb-3;
+    }
+
+    .form-label {
+      @apply text-xs lg:text-sm 2xl:text-base text-rose-600 dark:text-rose-500
+    }
+
+    .form-control {
+      @apply text-xs lg:text-sm 2xl:text-base text-rose-600 dark:text-rose-500 p-2 border border-rose-600 dark:border-rose-500 bg-transparent rounded-lg placeholder:text-slate-800 placeholder:opacity-50;
+    }
+
+    .text-control {
+      @apply text-sm lg:text-sm 2xl:text-base border border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-500 rounded-lg mx-auto block p-5 w-11/12 placeholder:text-slate-800 placeholder:opacity-50
+    }
+
+    .text-preview {
+      @apply p-5 border rounded-lg w-11/12 mx-auto text-sm h-60 overflow-auto
+    }
+
+    input[type=file]::file-selector-button {
+      @apply bg-transparent text-rose-600 border-solid border border-rose-600 p-1 rounded-md 
+    }
+
+
+    /* Style for layouts */
+    .dashboard-content {
+      @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-3/4 mx-auto mb-7 lg:pt-10 xl:px-20 max-h-screen overflow-auto;
+    }
+
+    /* Style for buttons */
+    .btn-info {
+      @apply text-xs lg:text-sm 2xl:text-base text-center p-2 rounded-lg block w-fit mx-auto bg-sky-500 dark:bg-sky-400 mt-3 text-white font-bold cursor-pointer
+    }
+
+    .btn-primary {
+      @apply text-xs lg:text-sm 2xl:text-base text-center p-2 rounded-lg block w-fit mx-auto bg-green-500 dark:bg-green-400 mt-3 text-white font-bold cursor-pointer
+    }
 }

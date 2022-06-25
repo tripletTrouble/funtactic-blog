@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,16 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id','uuid','created_at','updated_at', 'published_at'];
+    
+    protected $hidden = ['id'];
+
+    protected function isPublished(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->published_at === null ? true : false
+        );
+    }
 
     /**
      * Get the category that owns the Article

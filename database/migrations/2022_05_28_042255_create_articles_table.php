@@ -15,13 +15,16 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('title');
-            $table->string('thumbnail_url');
-            $table->string('thumbnail_source');
-            $table->longText('body');
+            $table->string('slug');
+            $table->string('excerpt');
+            $table->mediumText('body');
             $table->string('tags')->nullable();
+            $table->string('thumbnail_image');
+            $table->string('thumbnail_credit');
             $table->timestamp('published_at');
             $table->timestamps();
         });

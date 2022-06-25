@@ -8,7 +8,7 @@
     <title>{{ config('app.name') }} - {{ $title ?? "Let's write something great!" }}</title>
 
     {{-- Tailwind CSS --}}
-    <link rel="stylesheet" href="{{ asset('public/css/app.css?v=1.0.004') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?v=1.0.004') }}">
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
