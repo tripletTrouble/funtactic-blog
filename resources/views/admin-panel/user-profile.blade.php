@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="dashboard-content">
-        <p class="text-xl font-bold text-center text-blue-300 mb-2">Buat Profile</p>
-        <p class="text-xs text-center text-black italic mb-5">Kami menghargai privasimu, kosongkan data yang tidak ingin kamu
+        <p class="menu-title mb-0">Profil Pemilik Blog</p>
+        <p class="text-xs text-center text-rose-600 dark:rose-500 italic mb-5">Kami menghargai privasimu, kosongkan data yang
+            tidak ingin kamu
             tunjukkan kepada publik.</p>
         @if ($errors->any())
             <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
@@ -20,92 +21,102 @@
                 <p class="text-blue-400 text-sm">{{ session('success') }}</p>
             </div>
         @endif
-        <form action="{{ url('/user-profiles') }}" method="post">
+        <form action="{{ url('/user-profiles') }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <p class="font-bold text-sm text-blue-300 pb-1 border-b border-blue-300">Tentang Diri</p>
-            <div class="p-3" id="personal-profile">
-                <label class="label-flex" for="first_name">
-                    Nama Depan:
+            <fieldset class="p-3" id="personal-profile">
+                <legend
+                    class="font-bold text-base lg:text-lg text-rose-600 dark:text-rose-500 pb-1 border-b border-rose-600 w-full">
+                    Tentang Diri</legend>
+                <div class="form-col">
+                    <label class="form-label" for="first_name">Nama Depan:</label>
                     <input class="form-control" type="text" name=" first_name" id="first_name" placeholder="John"
                         value="{{ old('first_name') ?? $personalProfile->first_name }}">
-                </label>
-                <label class="label-flex" for="last_name">
-                    Nama Belakang:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="last_name">Foto Profile:</label>
                     <input class="form-control" type="text" name=" last_name" id="last_name" placeholder="Doe"
                         value="{{ old('last_name') ?? $personalProfile->last_name }}">
-                </label>
-                <label class="label-flex" for="born">
-                    Tanggal Lahir:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="profile_photo">Nama Belakang:</label>
+                    <input class="form-control" type="file" name=" profile_photo" id="profile_photo">
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="born">Tanggal Lahir:</label>
                     <input class="form-control" type="date" name="born" id="born"
                         value="{{ old('born') ?? $personalProfile->born }}">
-                </label>
-                <label class="label-flex" for="address">
-                    Alamat:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="address">Alamat:</label>
                     <input class="form-control" type="text" name="address" id="address"
                         placeholder="Jalan Santai No. 32, Surakarta"
                         value="{{ old('address') ?? $personalProfile->address }}">
-                </label>
-                <label class="label-flex" for="interest">
-                    Ketertarikan (minat):
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="interest">Ketertarikan (minat):</label>
                     <input class="form-control" type="text" name="interest" id="interest"
                         placeholder="teaching, parenting, mancing"
                         value="{{ old('interest') ?? $personalProfile->interest }}">
                     <p class="text-xs italic text-black">Pisahkan dengan tanda koma(,)</p>
-                </label>
-                <label class="label-flex" for="bio">
-                    Bio:
-                    <textarea class="form-control" name="bio" id="bio" rows="5" placeholder="Tulis sesuatu tentang dirimu ...">{{ old('bio') ?? $personalProfile->bio }}</textarea>
-                    <p class="text-xs italic text-black">Jumlah karakter: <span id="char">0</span> Pastikan tidak lebih dari
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="bio">Bio:</label>
+                    <textarea class="form-control" name="bio" id="bio" rows="5"
+                        placeholder="Tulis sesuatu tentang dirimu ...">{{ old('bio') ?? $personalProfile->bio }}</textarea>
+                    <p class="text-xs italic text-black">Jumlah karakter: <span id="char">0</span> Pastikan tidak lebih
+                        dari
                         255 karakter.</p>
-                </label>
-            </div>
-            <p class="font-bold text-sm text-blue-300 pb-1 border-b border-blue-300">Profile Media Sosial</p>
-            <div class="p-3" id="personal-profile">
-                <label class="label-flex" for="twitter">
-                    Twitter:
+                </div>
+            </fieldset>
+            <fieldset class="p-3" id="personal-profile">
+                <legend
+                    class="font-bold text-base lg:text-lg text-rose-600 dark:text-rose-500 pb-1 border-b border-rose-600 w-full">
+                    Profile Media Sosial</legend>
+                <div class="form-col">
+                    <label class="form-label" for="twitter">Twitter:</label>
                     <input class="form-control" type="text" name=" twitter" id="twitter"
                         placeholder="https://twitter.com/john_doe"
                         value="{{ old('twitter') ?? $socialMediaProfile->twitter }}">
-                </label>
-                <label class="label-flex" for="instagram">
-                    Instagram:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="instagram">Instagram:</label>
                     <input class="form-control" type="text" name=" instagram" id="instagram"
                         placeholder="https://instagram.com/john_doe"
                         value="{{ old('instagram') ?? $socialMediaProfile->instagram }}">
-                </label>
-                <label class="label-flex" for="facebook">
-                    Facebook:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="facebook">Facebook:</label>
                     <input class="form-control" type="text" name="facebook" id="facebook"
                         placeholder="https://www.facebook.com/john_doe"
                         value="{{ old('facebook') ?? $socialMediaProfile->facebook }}">
-                </label>
-                <label class="label-flex" for="tiktok">
-                    TikTok
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="tiktok">TikTok</label>
                     <input class="form-control" type="text" name="tiktok" id="tiktok"
                         placeholder="https://www.tiktok.com/@john_doe"
                         value="{{ old('tiktok') ?? $socialMediaProfile->tiktok }}">
-                </label>
-                <label class="label-flex" for="youtube">
-                    YouTube:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="youtube">YouTube:</label>
                     <input class="form-control" type="text" name="youtube" id="youtube"
                         placeholder="https://www.youtube.com/channel/AxzlkKmLvvN123bbN"
                         value="{{ old('youtube') ?? $socialMediaProfile->youtube }}">
-                </label>
-                <label class="label-flex" for="linkedin">
-                    LinkedIn:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="linkedin">LinkedIn:</label>
                     <input class="form-control" type="text" name="linkedin" id="linkedin"
                         placeholder="https://www.linkedin.com/in/john-doe-123as456"
                         value="{{ old('linkedin') ?? $socialMediaProfile->linkedin }}">
-                </label>
-                <label class="label-flex" for="github">
-                    GitHub:
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="github">GitHub:</label>
                     <input class="form-control" type="text" name="github" id="github"
                         placeholder="https://www.github.com/john_doe"
                         value="{{ old('github') ?? $socialMediaProfile->github }}">
-                </label>
-            </div>
-            <button class="block p-1.5 bg-blue-300 text-white text-sm w-full rounded-lg font-bold"><i
+                </div>
+            </fieldset>
+            <button class="btn-primary w-full"><i
                     class="bi bi-arrow-repeat"></i> Update Profile</button>
         </form>
     </div>

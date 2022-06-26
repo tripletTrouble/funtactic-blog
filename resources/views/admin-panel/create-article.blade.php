@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="dashboard-content">
-        <p class="text-lg lg:text-xl 2xl:text-2xl font-bold text-center text-rose-600 mb-5">Buat Artikel Baru</p>
+        <p class="menu-title">Buat Artikel Baru</p>
         @if ($errors->any())
-            <div class="border p-5 border-red-600 h-24 overflow-y-scroll rounded-lg mb-5">
-                <p class="text-red-600 mb-2 font-bold text-sm">Data gagal disimpan! </p>
-                <ul class="list-disc mx-3 text-red-600 text-sm">
+            <div class="alert-error">
+                <p class="alert-title">Data gagal disimpan! </p>
+                <ul class="alert-list">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -14,8 +14,8 @@
             </div>
         @endif
         @if (session('success'))
-            <div class="border p-5 border-blue-700 rounded-lg mb-5">
-                <p class="text-blue-700 text-sm">{{ session('success') }}</p>
+            <div class="alert-success">
+                <p class="alert-title">{{ session('success') }}</p>
             </div>
         @endif
         <form action="{{ url('/articles') }}" method="post" enctype="multipart/form-data">
@@ -26,13 +26,13 @@
                     placeholder="Tulis judul artikel..." value="{{ old('title') ?? '' }}" required>
             </div>
             <div class="form-col">
-                <label class="form-label" for="thumbnail_image">Thumbnail URL:</label>
+                <label class="form-label" for="thumbnail_image">Thumbnail Image:</label>
                 <input class="form-control" type="file" name=" thumbnail_image" id="thumbnail_image" required>
             </div>
             <div class="form-col">
-                <label class="form-label" for="thumbnail_source"> Thumbnail Source:</label>
-                <input class="form-control" type="text" name="thumbnail_source" id="thumbnail_source"
-                    placeholder="Contoh: John Doe via Unsplash" value="{{ old('thumbnail_source') ?? '' }}" required>
+                <label class="form-label" for="thumbnail_credit"> Thumbnail Credit:</label>
+                <input class="form-control" type="text" name="thumbnail_credit" id="thumbnail_credit"
+                    placeholder="Contoh: John Doe via Unsplash" value="{{ old('thumbnail_credit') ?? '' }}" required>
             </div>
             <div class="form-col">
                 <label class="form-label" for="body">Isi Artikel:</label>

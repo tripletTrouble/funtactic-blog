@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $this->categoryRepository = $categoryRepository;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -75,6 +75,6 @@ class CategoryController extends Controller
     public function destroy(DeleteCategoryRequest $request)
     {
         $this->categoryRepository->deleteCategory($request->id);
-        return redirect()->to(url('/categories'))->with('success', 'Kategori telah dihapus!');
+        return response()->json(['status' => 'OK']);
     }
 }

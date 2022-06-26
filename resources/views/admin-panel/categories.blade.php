@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="dashboard-content">
-        <p class="text-xl font-bold text-center text-blue-300 mb-5">Daftar Kategori</p>
+        <p class="menu-title">Daftar Kategori</p>
         @if ($errors->any())
             <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
                 <p class="text-red-400 mb-2 font-bold text-sm">Data gagal disimpan! </p>
@@ -14,97 +14,86 @@
             </div>
         @endif
         @if (session('success'))
-            <div class="border p-5 border-blue-400 rounded-lg mb-5">
-                <p class="text-blue-400 text-sm">{{ session('success') }}</p>
+            <div class="alert-success">
+                <p class="alert-title">{{ session('success') }}</p>
             </div>
         @endif
-        <button class="bg-emerald-300 text-white py-1.5 px-2 rounded-lg font-semibold text-sm mb-5"
-            onclick="showCreateForm()"><i class="bi bi-plus-lg"></i> Tambah Kategori</button>
-        <table class="table-auto text-sm">
-            <thead>
+        <button class="btn-primary mb-5" onclick="showCreateForm()"><i class="bi bi-plus-lg"></i> Tambah Kategori</button>
+        <table class="table fw-table stripped-table">
+            <thead class="table-head">
                 <tr>
-                    <th class="text-white bg-blue-300 p-2">#</th>
-                    <th class="text-white bg-blue-300 p-2">Nama Kategori</th>
-                    <th class="text-white bg-blue-300 p-2">Deskripsi</th>
-                    <th class="text-white bg-blue-300 p-2">Aksi</th>
+                    <th class="w-10">#</th>
+                    <th>Nama Kategori</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($categories as $category)
-                    <tr class="border-b border-blue-300">
-                        <td class="p-2">{{ $loop->iteration }}</td>
-                        <td class="p-2">{{ $category['name'] }}</td>
-                        <td class="p-2">{{ $category['description'] }}</td>
-                        <td class="p-2 w-max">
-                            <div class="flex flex-col md:flex-row items-center my-auto">
-                                <button class="p-1 bg-yellow-300 text-white rounded-lg mb-2 md:mb-0 md:mr-2 flex text-sm"
-                                    onclick="showEditForm({{ $category['id'] }})"><i class="bi bi-pencil mr-1"></i>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $category['name'] }}</td>
+                        <td>{{ $category['description'] }}</td>
+                        <td>
+                            <div class="btn-wrapper">
+                                <button class="btn-info" onclick="showEditForm({{ $category['id'] }})"><i
+                                        class="bi bi-pencil mr-1"></i>
                                     Ubah</button>
-                                <form class="delete-form" action="{{ url('/categories') }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <input type="hidden" name="id" value="{{ $category['id'] }}">
-                                    <button class="text-white bg-red-400 p-1 rounded-lg flex text-sm" type="submit"><i
-                                            class="bi bi-trash mr-1"></i> Hapus</button>
-                                </form>
+                                <button class="btn-danger"
+                                    onclick="confirmDelete({{ $category['id'] }}, '{{ $category['name'] }}')"><i
+                                        class="bi bi-trash mr-1"></i>Hapus</button>
                             </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <div class="absolute z-10 inset-0 bg-gray-500 bg-opacity-60 hidden items-center justify-center" id="edit-form">
-            <div class="p-5 bg-white border-2 border-blue-300 rounded-lg w-10/12">
-                <p class="text-center font-bold text-xl text-blue-300 mb-5">Edit Kategori</p>
+        <div class="modal" id="edit-form">
+            <div class="modal-card">
+                <p class="menu-title">Edit Kategori</p>
                 <form action="{{ url('categories') }}" method="post">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="id" id="input-edit-id" value="">
-                    <label class="label-flex" for="input-edit-name">
-                        Nama kategori:
+                    <div class="form-col">
+                        <label class="form-label" for="input-edit-name">Nama kategori:</label>
                         <input class="form-control" type="text" name="name" id="input-edit-name" value="">
-                    </label>
-                    <label class="label-flex" for="input-edit-description">
-                        Deskripsi kategori:
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="input-edit-description">Deskripsi kategori:</label>
                         <textarea class="form-control" name="description" id="input-edit-description" rows="5"></textarea>
-                    </label>
+                    </div>
                     <div class="flex justify-center gap-3">
-                        <button class="p-1 px-2 bg-emerald-300 text-white rounded-lg text-sm" type="submit"><i
-                                class="bi bi-send-fill"></i> Simpan Data</button>
-                        <span class="p-1 px-2 bg-red-400 text-white rounded-lg text-sm cursor-pointer"
-                            onclick="closeEditForm()"><i class="bi bi-x-lg"></i> Cancel</span>
+                        <button class="btn-primary" type="submit"><i class="bi bi-send-fill"></i> Simpan Data</button>
+                        <span class="btn-danger" onclick="closeEditForm()"><i class="bi bi-x-lg"></i> Cancel</span>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="absolute z-10 inset-0 bg-gray-500 bg-opacity-60 hidden items-center justify-center" id="create-form">
-            <div class="p-5 bg-white border-2 border-blue-300 rounded-lg w-10/12">
-                <p class="text-center font-bold text-xl text-blue-300 mb-5">Buat Kategori Baru</p>
+        <div class="modal" id="create-form">
+            <div class="modal-card">
+                <p class="menu-title">Buat Kategori Baru</p>
                 <form action="{{ url('categories') }}" method="post">
                     @csrf
-                    <input type="hidden" name="id" id="input-edit-id" value="">
-                    <label class="label-flex" for="input-edit-name">
-                        Nama kategori:
-                        <input class="form-control" type="text" name="name" id="input-edit-name" value="">
-                    </label>
-                    <label class="label-flex" for="input-edit-description">
-                        Deskripsi kategori:
-                        <textarea class="form-control" name="description" id="input-edit-description" rows="5"></textarea>
-                    </label>
+                    <div class="form-col">
+                        <label class="form-label" for="input-post-name">Nama kategori:</label>
+                        <input class="form-control" type="text" name="name" id="input-post-name" value="">
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="input-post-description">Deskripsi kategori:</label>
+                        <textarea class="form-control" name="description" id="input-post-description" rows="5"></textarea>
+                    </div>
                     <div class="flex justify-center gap-3">
-                        <button class="p-1 px-2 bg-emerald-300 text-white rounded-lg text-sm" type="submit"><i
-                                class="bi bi-send-fill"></i> Simpan Data</button>
-                        <span class="p-1 px-2 bg-red-400 text-white rounded-lg text-sm cursor-pointer"
-                            onclick="closeCreateForm()"><i class="bi bi-x-lg"></i> Cancel</span>
+                        <button class="btn-primary" type="submit"><i class="bi bi-send-fill"></i> Simpan Data</button>
+                        <span class="btn-danger" onclick="closeCreateForm()"><i class="bi bi-x-lg"></i> Cancel</span>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="{{ asset('public/js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         function getCategoryById(id) {
-            axios.get('/funtastic-blog/api/categories?id=' + id)
+            axios.get('/api/categories?id=' + id)
                 .then(function(response) {
                     deployEditForm(response.data)
                 })
@@ -119,15 +108,13 @@
         }
 
         function deployEditForm(data) {
-            var inputEditId = document.getElementById('input-edit-id')
             var inputEditName = document.getElementById('input-edit-name')
             var inputEditDescription = document.getElementById('input-edit-description')
             var editForm = document.getElementById('edit-form')
 
-            inputEditId.value = data['id']
             inputEditName.value = data['name']
             inputEditDescription.value = data['description']
-            editForm.classList.replace('hidden', 'flex')
+            editForm.style.display = 'flex'
         }
 
         function showEditForm(id) {
@@ -136,38 +123,52 @@
 
         function closeEditForm() {
             var editForm = document.getElementById('edit-form')
-            editForm.classList.replace('flex', 'hidden')
+            editForm.style.display = 'none'
         }
 
         function showCreateForm() {
             var createForm = document.getElementById('create-form')
-            createForm.classList.replace('hidden', 'flex')
+            createForm.style.display = 'flex'
         }
 
         function closeCreateForm() {
             var createForm = document.getElementById('create-form')
-            createForm.classList.replace('flex', 'hidden')
+            createForm.style.display = 'none'
         }
 
-        var deleteForms = document.getElementsByClassName('delete-form');
+        function confirmDelete(categoryId, categoryName) {
+            Swal.fire({
+                title: 'Menghapus Kategori',
+                text: `Apakah kamu yakin akan menghapus kategori ${categoryName} ?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#22c55e',
+                cancelButtonColor: '#dc2626',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteCategory(categoryId)
+                }
+            })
+        }
 
-        for (var i = 0; i < deleteForms.length; i++) {
-            deleteForms[i].addEventListener('submit', function(e) {
-                e.preventDefault()
-                Swal.fire({
-                    title: 'Menghapus Kategori',
-                    text: "Apakah kamu yakin akan menghapus kategori ini?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.submit()
+        function deleteCategory(categoryId) {
+            axios.delete('/categories', {
+                    params: {
+                        'id': categoryId,
                     }
                 })
-            })
+                .then(function(response) {
+                    window.location.reload();
+                })
+                .catch(function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ooops ...',
+                        text: 'Terjadi kesalahan server!',
+                        timer: 1500
+                    })
+                })
         }
     </script>
 @endsection
