@@ -18,7 +18,7 @@
                 <p class="alert-title">{{ session('success') }}</p>
             </div>
         @endif
-        <form action="{{ url('/articles') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('articles/' . $article['uuid']) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-col">
@@ -27,19 +27,35 @@
                     placeholder="Tulis judul artikel..." value="{{ old('title') ?? $article['title'] }}" required>
             </div>
             <div class="form-col">
-                <label class="form-label" for="thumbnail_image">Thumbnail Image:</label>
-                <input class="form-control" type="file" name=" thumbnail_image" id="thumbnail_image" required>
+                <label class="form-label" for="excerpt">Deskripsi singkat (excerpt):</label>
+                <input class="form-control" type="text" name=" excerpt" id="excerpt"
+                    placeholder="Tulis deskripsi artikel..." value="{{ old('excerpt') ?? $article['excerpt'] }}" required>
+            </div>
+            <div class="form-col">
+                <label class="form-label" for="thumbnail_image">Thumbnail Image (direkomendasikan 1280x720 px):</label>
+                <input class="form-control" type="file" name=" thumbnail_image" id="thumbnail_image" onchange="loadFile(event)">
+                <img width="240" height="135" src="{{ asset('storage/' . $article['thumbnail_image']) }}" id="preview-image">
+                <script>
+                    var loadFile = function(event) {
+                        var reader = new FileReader();
+                        reader.onload = function() {
+                            var output = document.getElementById('preview-image');
+                            output.src = reader.result;
+                        };
+                        reader.readAsDataURL(event.target.files[0]);
+                    };
+                </script>
             </div>
             <div class="form-col">
                 <label class="form-label" for="thumbnail_credit"> Thumbnail Credit:</label>
                 <input class="form-control" type="text" name="thumbnail_credit" id="thumbnail_credit"
-                    placeholder="Contoh: John Doe via Unsplash" value="{{ old('thumbnail_credit') ?? $article['title'] }}"
+                    placeholder="Contoh: John Doe via Unsplash" value="{{ old('thumbnail_credit') ?? $article['thumbnail_credit'] }}"
                     required>
             </div>
             <div class="form-col">
                 <label class="form-label" for="body">Isi Artikel:</label>
                 <textarea class="text-control" name="body" id="body" rows="10"
-                    value="{{ old('body') ?? $article['body'] }}" required placeholder="Let's write something great ...">{{ old('body') }}</textarea>
+                    value="{{ old('body') ?? $article['body'] }}" required placeholder="Let's write something great ...">{{ old('body') ?? $article['body'] }}</textarea>
                 <div class="text-preview hidden" id="preview">
                 </div>
                 <span class="btn-info w-full" onclick="previewText(this)">Preview</span>
@@ -57,8 +73,8 @@
             </div>
             <div class="form-col">
                 <label class="form-label" for="tags">Tags (pisahkan dengan tanda koma):</label>
-                <input class="form-control" type="text" name="tags" value="{{ old('tags') ?? $article['tags'] }}" id="tags"
-                    placeholder="Contoh: crypto, teknologi">
+                <input class="form-control" type="text" name="tags" value="{{ old('tags') ?? $article['tags'] }}"
+                    id="tags" placeholder="Contoh: crypto, teknologi">
             </div>
             <button class="btn-primary w-full" type="submit"><i class="bi bi-send-fill"></i>
                 Simpan Artikel</button>
@@ -67,9 +83,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
     <script>
-        var articleBody = document.getElementById('body')
-        var preview = document.getElementById('preview')
         var converter = new showdown.Converter()
+        var articleBody = document.getElementById('body')
 
         function convert(text) {
             var html = converter.makeHtml(text)
@@ -83,17 +98,21 @@
         })
 
         function previewText(event) {
-            articleBody.classList.add('hidden')
+            var preview = document.getElementById('preview')
+
+            articleBody.style.display = 'none'
             preview.classList.remove('hidden')
-            event.classList.replace('block', 'hidden')
-            event.nextElementSibling.classList.replace('hidden', 'block')
+            event.classList.add('hidden')
+            event.nextElementSibling.classList.remove('hidden')
         }
 
         function backWriting(event) {
-            articleBody.classList.remove('hidden')
+            var preview = document.getElementById('preview')
+
+            articleBody.style.display = 'block'
             preview.classList.add('hidden')
-            event.classList.replace('block', 'hidden')
-            event.previousElementSibling.classList.replace('hidden', 'block')
+            event.classList.add('hidden')
+            event.previousElementSibling.classList.remove('hidden')
         }
     </script>
 @endsection

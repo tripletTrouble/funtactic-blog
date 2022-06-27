@@ -98,19 +98,19 @@ blockquote {
 
     /* Style for buttons */
     .btn-info {
-      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-sky-500 dark:bg-sky-400 mt-3 text-white font-bold cursor-pointer
+      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-sky-500 dark:bg-sky-400 text-white font-bold cursor-pointer
     }
 
     .btn-primary {
-      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-green-500 dark:bg-green-400 mt-3 text-white font-bold cursor-pointer
+      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-green-500 dark:bg-green-400 text-white font-bold cursor-pointer
     }
 
     .btn-warning {
-      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-orange-500 dark:bg-orange-400 mt-3 text-white font-bold cursor-pointer
+      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-orange-500 dark:bg-orange-400 text-white font-bold cursor-pointer
     }
 
     .btn-danger {
-      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-red-600 dark:bg-red-500 mt-3 text-white font-bold cursor-pointer
+      @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-red-600 dark:bg-red-500 text-white font-bold cursor-pointer
     }
 
     /* Style for table */
@@ -131,7 +131,7 @@ blockquote {
     }
 
     .btn-wrapper {
-      @apply flex flex-col md:flex-row gap-1 items-center justify-center -translate-y-2 w-fit mx-auto
+      @apply flex flex-col md:flex-row gap-1 items-center justify-center py-1 w-fit mx-auto
     }
 
     /* Style for modal */

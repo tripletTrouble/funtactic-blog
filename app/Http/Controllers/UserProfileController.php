@@ -9,13 +9,6 @@ use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
-    private UserProfileRepositoryInterface $userProfileRepository;
-
-    public function __construct(UserProfileRepositoryInterface $userProfileRepository)
-    {
-        $this->userProfileRepository = $userProfileRepository;
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

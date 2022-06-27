@@ -4,52 +4,68 @@ namespace App\Repositories;
 
 use Carbon\Carbon;
 use App\Models\Article;
-use App\Interfaces\ArticleRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
-class ArticleRepository implements ArticleRepositoryInterface
+class ArticleRepository
 {
-  function getArticles(): Collection
-  {
-    return Article::with(['category'])->get();
-  }
+    public function storeArticle (array $data): int
+    {
+        $article = new Article();
+        $article->uuid = Str::uuid();
+        $article->category_id = $data['category_id'];
+        $article->user_id = $data['user_id'];
+        $article->title = $data['title'];
+        $article->slug = Str::slug($data['title'],);
+        $article->excerpt = $data['excerpt'];
+        $article->body = $data['body'];
+        $article->tags = $data['tags'];
+        $article->thumbnail_credit = $data['thumbnail_credit'];
+        $article->published_at = Carbon::now();
+        $article->save();
+        return $article->id;
+    }
 
-  function getArticleById($id): Article
-  {
-    return Article::with(['category'])->where('id', $id)->first();
-  }
+    public function getArticles(): Builder
+    {
+        return Article::latest();
+    }
 
-  function storeArticle($user_id, $data): bool
-  {
-    $article = new Article();
-    $article->user_id = $user_id;
-    $article->category_id = $data['category_id'];
-    $article->title = $data['title'];
-    $article->thumbnail_url = $data['thumbnail_url'];
-    $article->thumbnail_source = $data['thumbnail_source'];
-    $article->body = $data['body'];
-    $article->tags = $data['tags'];
-    $article->published_at = Carbon::now();
-    $article->save();
-    return true;
-  }
+    /**
+     * Method for finding article based on given
+     * parameter.
+     * 
+     * @param string $query: uuid | slug
+     */
 
-  function updateArticle($data): bool
-  {
-    $article = Article::find($data['id']);
-    $article->title = $data['title'];
-    $article->category_id = $data['category_id'];
-    $article->thumbnail_url = $data['thumbnail_url'];
-    $article->thumbnail_source = $data['thumbnail_source'];
-    $article->body = $data['body'];
-    $article->tags = $data['tags'];
-    $article->save();
-    return true;
-  }
+    public function getArticle(string $query): Article
+    {
+        if (Str::isUuid($query)){
+            return Article::where('uuid', $query)->first();
+        }
+        return Article::where('slug', $query)->first();
+    }
 
-  function deleteArticle($id): bool
-  {
-    Article::destroy($id);
-    return true;
-  }
+    public function updateArticle (array $data): int
+    {
+        $article = Article::where('uuid', $data['uuid'])->first();
+        $article->category_id = $data['category_id'];
+        $article->title = $data['title'];
+        $article->slug = Str::slug($data['title'],);
+        $article->excerpt = $data['excerpt'];
+        $article->body = $data['body'];
+        $article->tags = $data['tags'];
+        $article->thumbnail_credit = $data['thumbnail_credit'];
+        $article->published_at = Carbon::now();
+        $article->save();
+        return $article->id;
+    }
+
+    public function deleteArticle (string $uuid): string
+    {
+        $article = Article::where('uuid', $uuid)->first();
+        $image_path = $article->thumbnail_image;
+        $article->delete();
+        return $image_path;
+    }
 }

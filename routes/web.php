@@ -5,9 +5,6 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserProfileController;
-use App\Interfaces\ArticleRepositoryInterface;
-use App\Interfaces\UserServiceInterface;
-use App\Models\Article;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +17,8 @@ use App\Models\Article;
 |
 */
 
-Route::get('/', function (UserServiceInterface $userServiceInterface, ArticleRepositoryInterface $articleRepositoryInterface) {
-    return view('front-page.home', [
-        'owner' => $userServiceInterface->getOwnerInfo(['full_name']),
-        'articles' => $articleRepositoryInterface->getArticles()
-    ]);
+Route::get('/', function () {
+    return view('front-page.home');
 });
 
 Route::get('dashboard', function () {
@@ -34,17 +28,17 @@ Route::get('dashboard', function () {
 Route::controller(ArticleController::class)->group(function () {
     Route::get('/articles', 'index');
     Route::get('/new-article', 'create');
-    Route::get('/edit-article', 'edit');
+    Route::get('/articles/{uuid}/edit', 'edit');
     Route::post('/articles', 'store');
-    Route::put('/articles', 'update');
-    Route::delete('/articles', 'destroy');
+    Route::put('/articles/{uuid}', 'update');
+    Route::delete('/articles/{uuid}', 'destroy');
 });
 
 Route::controller(CategoryController::class)->group(function() {
     Route::get('/categories', 'index');
     Route::post('/categories', 'store');
-    Route::put('/categories', 'update');
-    Route::delete('/categories', 'destroy');
+    Route::put('/categories/{uuid}', 'update');
+    Route::delete('/categories/{uuid}', 'destroy');
 });
 
 Route::controller(SettingController::class)->group(function() {

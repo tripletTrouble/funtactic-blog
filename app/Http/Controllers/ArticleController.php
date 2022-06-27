@@ -2,24 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Articles;
 use App\Models\Article;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\EditArticleRequest;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\DeleteArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
-use App\Interfaces\ArticleRepositoryInterface;
 
 class ArticleController extends Controller
 {
-    private ArticleRepositoryInterface $articleRepository;
-
-    public function __construct(ArticleRepositoryInterface $articleRepository)
-    {
-        $this->articleRepository = $articleRepository;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +21,7 @@ class ArticleController extends Controller
     {
         return view('admin-panel.articles', [
             'title' => 'Daftar Artikel',
-            'articles' => $this->articleRepository->getArticles()
+            'articles' => Articles::get(12)
         ]);
     }
 
@@ -54,9 +46,8 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        $user_id = Auth::id() ?? 1;
-        $this->articleRepository->storeArticle($user_id, $request->except(['_token']));
-        return redirect()->back()->with('success', 'Artikel telah dibuat!');
+        Articles::store($request->merge(['user_id' => Auth::id() ?? 1]));
+        return back()->with('success', 'Artikel telah dibuat!');
     }
 
     /**
@@ -76,11 +67,11 @@ class ArticleController extends Controller
      * @param  \App\Http\Requests\EditArticleRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(EditArticleRequest $request)
+    public function edit(string $uuid)
     {
         return view('admin-panel.edit-article', [
             'title' => 'Sunting Artikel',
-            'article' => $this->articleRepository->getArticleById($request->id),
+            'article' => Articles::find($uuid),
             'categories' => Category::all()
         ]);
     }
@@ -88,12 +79,12 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateArticleRequest $requestt
+     * @param  \App\Http\Requests\UpdateArticleRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticleRequest $request)
+    public function update(UpdateArticleRequest $request, string $uuid)
     {
-        $this->articleRepository->updateArticle($request->except(['_token']));
+        Articles::update($request->merge(['uuid' => $uuid]));
         return redirect()->to(url('/articles'))->with('success', 'Artikel telah diperbarui!');
     }
 
@@ -105,7 +96,7 @@ class ArticleController extends Controller
      */
     public function destroy(DeleteArticleRequest $request)
     {
-        $this->articleRepository->deleteArticle($request['id']);
+        $this->articleService->deleteArticle($request['id']);
         return redirect()->to(url('/articles'));
     }
 }

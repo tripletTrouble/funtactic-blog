@@ -19,7 +19,7 @@ class Article extends Model
     protected function isPublished(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->published_at === null ? true : false
+            get: fn () => $this->published_at === null ? false : true
         );
     }
 

@@ -2,10 +2,25 @@
 
 namespace App\Http\Requests;
 
+use App\Facades\Articles;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateArticleRequest extends FormRequest
 {
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'uuid' => $this->route('uuid'),
+            'id' => Articles::find($this->route('uuid'))->id
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -14,12 +29,20 @@ class UpdateArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:articles,id',
-            'title' => 'required|string|min:10|max:255',
+            'title' => [
+                'required',
+                Rule::unique('articles')->ignore($this->id),
+                'string',
+                'min:10',
+                'max:255'
+            ],
+            'uuid' => 'required|exists:articles,uuid',
             'category_id' => 'required|integer|exists:categories,id',
-            'thumbnail_url' => 'required|string|min:10|max:255',
-            'thumbnail_source' => 'required|string|min:10|max:255',
-            'body' => 'required|string'
+            'excerpt' => 'required|string|min:10|max:255',
+            'body' => 'required|string',
+            'tags' => 'nullable|string|max:255',
+            'thumbnail_image' => 'nullable|image|file|max:400|dimensions:max_width=1280,max_height=720',
+            'thumbnail_credit' => 'nullable|string|min:10|max:255',
         ];
     }
 }

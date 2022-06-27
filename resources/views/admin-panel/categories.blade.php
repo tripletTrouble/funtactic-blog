@@ -4,9 +4,9 @@
     <div class="dashboard-content">
         <p class="menu-title">Daftar Kategori</p>
         @if ($errors->any())
-            <div class="border p-5 border-red-400 h-24 overflow-y-scroll rounded-lg mb-5">
-                <p class="text-red-400 mb-2 font-bold text-sm">Data gagal disimpan! </p>
-                <ul class="list-disc mx-3 text-red-400 text-sm">
+            <div class="alert-error">
+                <p class="alert-title">Data gagal disimpan! </p>
+                <ul class="error-list">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -22,27 +22,33 @@
         <table class="table fw-table stripped-table">
             <thead class="table-head">
                 <tr>
-                    <th class="w-10">#</th>
+                    <th class="w-10 text-center">#</th>
                     <th>Nama Kategori</th>
-                    <th>Deskripsi</th>
+                    <th class="w-2/5">Deskripsi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($categories as $category)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $category['name'] }}</td>
                         <td>{{ $category['description'] }}</td>
                         <td>
-                            <div class="btn-wrapper">
-                                <button class="btn-info" onclick="showEditForm({{ $category['id'] }})"><i
-                                        class="bi bi-pencil mr-1"></i>
-                                    Ubah</button>
-                                <button class="btn-danger"
-                                    onclick="confirmDelete({{ $category['id'] }}, '{{ $category['name'] }}')"><i
-                                        class="bi bi-trash mr-1"></i>Hapus</button>
-                            </div>
+                            @if ($category['id'] !== 1)
+                                <div class="btn-wrapper">
+                                    <button class="btn-info" onclick="showEditForm('{{ $category['uuid'] }}')"><i
+                                            class="bi bi-pencil mr-1"></i>
+                                        Ubah</button>
+                                    <form class="delete-form" action="{{ url('categories/' . $category['uuid']) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn-danger" type="submit"><i class="bi bi-trash-fill"></i>
+                                            Hapus</button>
+                                    </form>
+                                </div>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -51,7 +57,7 @@
         <div class="modal" id="edit-form">
             <div class="modal-card">
                 <p class="menu-title">Edit Kategori</p>
-                <form action="{{ url('categories') }}" method="post">
+                <form action="{{ url('categories/' . $category['uuid']) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="form-col">
@@ -92,8 +98,9 @@
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
-        function getCategoryById(id) {
-            axios.get('/api/categories?id=' + id)
+        // Script for edititng category
+        function getCategory(uuid) {
+            axios.get('/api/categories?uuid=' + uuid)
                 .then(function(response) {
                     deployEditForm(response.data)
                 })
@@ -117,8 +124,8 @@
             editForm.style.display = 'flex'
         }
 
-        function showEditForm(id) {
-            getCategoryById(id)
+        function showEditForm(uuid) {
+            getCategory(uuid)
         }
 
         function closeEditForm() {
@@ -136,39 +143,28 @@
             createForm.style.display = 'none'
         }
 
-        function confirmDelete(categoryId, categoryName) {
-            Swal.fire({
-                title: 'Menghapus Kategori',
-                text: `Apakah kamu yakin akan menghapus kategori ${categoryName} ?`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#22c55e',
-                cancelButtonColor: '#dc2626',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    deleteCategory(categoryId)
-                }
-            })
-        }
+        // Script for deleting category
+        var deleteForms = document.getElementsByClassName('delete-form')
 
-        function deleteCategory(categoryId) {
-            axios.delete('/categories', {
-                    params: {
-                        'id': categoryId,
+        for (var i = 0; i < deleteForms.length; i++) {
+            deleteForms[i].addEventListener('submit', function(event) {
+                event.preventDefault()
+                var form = event.target
+                Swal.fire({
+                    title: 'Menghapus Kategori',
+                    text: "Apakah kamu yakin untuk menghapus kategori ini?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yakin',
+                    cancelButtonText: 'Batalkan'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
                     }
                 })
-                .then(function(response) {
-                    window.location.reload();
-                })
-                .catch(function(error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Ooops ...',
-                        text: 'Terjadi kesalahan server!',
-                        timer: 1500
-                    })
-                })
+            })
         }
     </script>
 @endsection

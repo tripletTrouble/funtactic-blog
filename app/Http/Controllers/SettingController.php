@@ -10,14 +10,6 @@ use App\Interfaces\SettingRespositoryInterface;
 
 class SettingController extends Controller
 {
-    private SettingRespositoryInterface $settingRespository;
-    private CategoryRepositoryInterface $categoryRepository;
-
-    public function __construct(SettingRespositoryInterface $settingRespository, CategoryRepositoryInterface $categoryRepository)
-    {
-        $this->settingRespository = $settingRespository;
-        $this->categoryRepository = $categoryRepository;
-    }
     /**
      * Display site settings form
      * 

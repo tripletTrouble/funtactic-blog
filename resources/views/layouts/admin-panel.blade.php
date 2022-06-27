@@ -37,7 +37,7 @@
         </div>
     </header>
     <div class="fixed inset-0 z-20 justify-end hidden" id="responsive-menu">
-        <div class="flex flex-col gap-3 w-3/4 md:w-5/12 lg:w-1/3 p-10 bg-gradient-to-br via-sky-200 dark:via-black from-slate-50 to-white dark:from-gray-800 dark:to-slate-900 rounded-l-xl"
+        <div class="flex flex-col gap-3 w-3/4 md:w-5/12 lg:w-1/3 p-10 bg-gradient-to-br via-sky-100 dark:via-black from-slate-50 to-white dark:from-gray-800 dark:to-slate-900 rounded-l-xl"
             id="menu-list" tabindex="0">
             <div class="menu-group">
                 <a class="group-name pb-2 border-b border-rose-600 w-full text-left" href="{{ url('/dashboard') }}"><i
@@ -77,7 +77,7 @@
         </div>
     </div>
     <main class="mt-20 xl:mt-0 xl:flex xl:h-screen max-w-screen-xl mx-auto pb-5 lg:pb-0">
-        <div class="w-1/3 bg-gradient-to-br vvia-sky-200 dark:via-black from-slate-50 to-white dark:from-gray-800 dark:to-slate-900 rounded-r-xl border-r-4 border-slate-500 dark:border-slate-100 drop-shadow-2xl hidden xl:flex flex-col items-center p-10"
+        <div class="w-1/3 bg-gradient-to-br vvia-sky-200 dark:via-black from-slate-50 via-sky-100 to-white dark:from-gray-800 dark:to-slate-900 rounded-r-xl border-r-4 border-slate-500 dark:border-slate-100 hidden xl:flex flex-col items-center p-10"
             id="large-menu">
             <div class="flex items-center mb-7" id="brand">
                 <img class="w-8 mr-2" id="brand-image" src="{{ asset('img/logo.svg') }}"

@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Interfaces\UserServiceInterface;
-use App\Services\UserSerivce;
+use App\Services\CategoryService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(UserServiceInterface::class, UserSerivce::class);
+        $this->app->bind('categories', function () {
+            return new CategoryService;
+        });
     }
 
     /**

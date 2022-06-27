@@ -1,9 +1,8 @@
 <?php
 
+use App\Facades\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
-use App\Interfaces\CategoryRepositoryInterface;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +15,11 @@ use App\Interfaces\CategoryRepositoryInterface;
 |
 */
 
-Route::get("categories", function (Request $request, CategoryRepositoryInterface $categoryRepository){
-    if ($request->id != null){
-        return response()->json($categoryRepository->getCategoryById($request->id), 200);
+Route::get("categories", function (Request $request){
+    if ($request->uuid != null){
+        return response()->json(Categories::find($request->uuid), 200);
     }else {
-        return response()->json($categoryRepository->getCategories(), 200);
+        return response()->json(Categories::get(), 200);
     }
 });
 

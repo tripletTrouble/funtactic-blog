@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Categories;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\DeleteCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
-use App\Interfaces\CategoryRepositoryInterface;
 
 class CategoryController extends Controller
 {
-    private CategoryRepositoryInterface $categoryRepository;
-
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +19,7 @@ class CategoryController extends Controller
     {
         return view('admin-panel.categories', [
             'title' => 'Daftar Kategori',
-            'categories' => $this->categoryRepository->getCategories()
+            'categories' => Categories::get(12)
         ]);
     }
 
@@ -38,8 +31,8 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $this->categoryRepository->storeCategory($request->except(['_token']));
-        return redirect()->to(url('/categories'))->with('success', 'Kategori telah dibuat!');
+        Categories::store($request);
+        return back()->with('success', 'Kategori telah dibuat!');
     }
 
     /**
@@ -60,9 +53,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request)
+    public function update(UpdateCategoryRequest $request, string $uuid)
     {
-        $this->categoryRepository->updateCategory($request->except(['_token']));
+        Categories::update($request->merge(['uuid' => $uuid]));
         return redirect()->to(url('/categories'))->with('success', 'Kategori telah diubah!');
     }
 
@@ -72,9 +65,9 @@ class CategoryController extends Controller
      * @param  \App\Http\Requests\DeleteCategoryRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeleteCategoryRequest $request)
+    public function destroy(string $uuid)
     {
-        $this->categoryRepository->deleteCategory($request->id);
-        return response()->json(['status' => 'OK']);
+        Categories::delete($uuid);
+        return back()->with('success', 'Kategori telah dihapus!');
     }
 }

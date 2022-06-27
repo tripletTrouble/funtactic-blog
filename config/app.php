@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id-ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -190,12 +190,13 @@ return [
         /*
          * Application Service Providers...
          */
+        App\Providers\ArticleServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\RespositoryServiceProvider::class,
+        
 
     ],
 
@@ -213,6 +214,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Articles' => App\Facades\Articles::class,
     ])->toArray(),
 
 ];

@@ -9,41 +9,50 @@
             </div>
         @endif
         <table class="table fw-table stripped-table">
-          <thead class="table-head">
-            <tr>
-              <th class="w-10">#</th>
-              <th>Judul Artikel</th>
-              <th>Kategori</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($articles as $article)
+            <thead class="table-head">
                 <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $article['title'] }}</td>
-                  <td>{{ $article->category['name'] }}</td>
-                  <td>
-                    <div class="btn-wrapper">
-                      <a class="btn-info" href="{{ url('/edit-article?id=' . $article['id']) }}"><i class="bi bi-pencil mr-1"></i> Ubah</a>
-                      <form action="{{ url('/articles') }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <input type="hidden" name="id" value="{{ $article['id'] }}">
-                        <button class="btn-danger" type="submit"><i class="bi bi-trash mr-1"></i> Hapus</button>
-                      </form>
-                      <form action="{{ url('/articles') }}" method="post">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="id" value="{{ $article['id'] }}">
-                        <button class="btn-warning" type="submit"><i class="bi bi-exclamation-triangle-fill mr-1"></i> Hapus</button>
-                      </form>
-                    </div>
-                  </td>
+                    <th class="w-10">#</th>
+                    <th class="lg:w-2/5">Judul Artikel</th>
+                    <th>Kategori</th>
+                    <th class="lg:w-2/5">Aksi</th>
                 </tr>
-            @endforeach
-          </tbody>
+            </thead>
+            <tbody>
+                @foreach ($articles as $key => $article)
+                    <tr>
+                        <td class="text-center">{{ $articles->firstItem() + $key }}</td>
+                        <td class="truncate">{{ $article['title'] }}</td>
+                        <td>{{ $article->category['name'] }}</td>
+                        <td>
+                            <div class="btn-wrapper">
+                                <a class="btn-info" href="{{ url('articles/' . $article['uuid'] . '/edit') }}"><i
+                                        class="bi bi-pencil mr-1"></i> Ubah</a>
+                                <form action="{{ url('articles/' . $article['uuid']) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn-danger" type="submit"><i class="bi bi-trash mr-1"></i>
+                                        Hapus</button>
+                                </form>
+                                @if ($article['is_published'])
+                                    <form action="{{ url('articles/' . $article['uuid'] . '/unpublish') }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <button class="btn-warning" type="submit"><i
+                                                class="bi bi-exclamation-triangle-fill mr-1"></i> Unpublish</button>
+                                    </form>
+                                @else
+                                    <form action="{{ url('articles/' . $article['uuid'] . '/publish') }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <button class="btn-primary" type="submit"><i
+                                                class="bi bi-exclamation-triangle-fill mr-1"></i> Publish</button>
+                                    </form>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
-
 @endsection
