@@ -24,11 +24,14 @@
 <body>
     <header class="fixed top-0 right-0 w-screen z-10 xl:hidden">
         <div
-            class="flex justify-between items-center p-3 md:px-5 border-b-2 border-rose-600 bg-slate-100 dark:bg-gray-700">
+            class="flex justify-between items-center p-3 md:px-20 border-b-2 border-rose-600 bg-slate-100 dark:bg-gray-700">
             <div class="flex items-center" id="brand">
-                <img class="w-8 mr-2" id="brand-image" src="{{ asset('img/logo.svg') }}"
+                @inject('setting', 'App\Services\SettingService')
+                <img class="w-8 mr-2" id="brand-image"
+                    src="{{ $setting->identities()['site_logo'] ?? asset('img/logo.svg') }}"
                     alt="{{ config('app.name') }}">
-                <p class="font-bold text-rose-600 text-lg leading-tight" id="brand-text">{{ config('app.name') }}
+                <p class="font-bold text-rose-600 text-lg leading-tight" id="brand-text">
+                    {{ $setting->identities()['site_name'] ?? config('app.name') }}
                 </p>
             </div>
             <div id="menu-panel">
@@ -39,6 +42,7 @@
     <div class="fixed inset-0 z-20 justify-end hidden" id="responsive-menu">
         <div class="flex flex-col gap-3 w-3/4 md:w-5/12 lg:w-1/3 p-10 bg-gradient-to-br via-sky-100 dark:via-black from-slate-50 to-white dark:from-gray-800 dark:to-slate-900 rounded-l-xl"
             id="menu-list" tabindex="0">
+            {{ Settings::identities()['site_name'] }}
             <div class="menu-group">
                 <a class="group-name pb-2 border-b border-rose-600 w-full text-left" href="{{ url('/dashboard') }}"><i
                         class="bi bi-house-door-fill mr-1.5"></i> Dashboard</a>
@@ -61,8 +65,8 @@
             </div>
             <div class="menu-group">
                 <p class="group-name"><i class="bi bi-person-fill mr-2"></i> Akun</p>
-                <a class="group-items" href="{{ url('edit-profile') }}"><i
-                        class="bi bi-person-lines-fill mr-1.5"></i> Profile pemilik</a>
+                <a class="group-items" href="{{ url('users/' . Auth::user()->uuid) . '/profiles' }}"><i class="bi bi-person-lines-fill mr-1.5"></i>
+                    Profile pemilik</a>
                 <a class="group-items" href="#"><i class="bi bi-shield-lock-fill mr-1.5"></i> Kredensial
                     pemilik</a>
             </div>

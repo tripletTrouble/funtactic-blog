@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +19,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert ([
+            'uuid' => Str::uuid(),
             'name' => 'administrator',
             'email' => 'admin@funtastic-blog.com',
             'email_verified_at' => Carbon::now(),

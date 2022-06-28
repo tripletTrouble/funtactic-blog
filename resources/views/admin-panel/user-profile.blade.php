@@ -31,39 +31,39 @@
                 <div class="form-col">
                     <label class="form-label" for="first_name">Nama Depan:</label>
                     <input class="form-control" type="text" name=" first_name" id="first_name" placeholder="John"
-                        value="{{ old('first_name') ?? $personalProfile->first_name }}">
+                        value="{{ old('first_name') ?? $profiles->first_name ?? '' }}">
                 </div>
                 <div class="form-col">
-                    <label class="form-label" for="last_name">Foto Profile:</label>
+                    <label class="form-label" for="last_name">Nama Belakang:</label>
                     <input class="form-control" type="text" name=" last_name" id="last_name" placeholder="Doe"
-                        value="{{ old('last_name') ?? $personalProfile->last_name }}">
+                        value="{{ old('last_name') ?? $profiles->last_name ?? '' }}">
                 </div>
                 <div class="form-col">
-                    <label class="form-label" for="profile_photo">Nama Belakang:</label>
+                    <label class="form-label" for="profile_photo">Foto Profile:</label>
                     <input class="form-control" type="file" name=" profile_photo" id="profile_photo">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="born">Tanggal Lahir:</label>
                     <input class="form-control" type="date" name="born" id="born"
-                        value="{{ old('born') ?? $personalProfile->born }}">
+                        value="{{ old('born') ?? $profiles->born ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="address">Alamat:</label>
                     <input class="form-control" type="text" name="address" id="address"
                         placeholder="Jalan Santai No. 32, Surakarta"
-                        value="{{ old('address') ?? $personalProfile->address }}">
+                        value="{{ old('address') ?? $profiles->address ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="interest">Ketertarikan (minat):</label>
                     <input class="form-control" type="text" name="interest" id="interest"
                         placeholder="teaching, parenting, mancing"
-                        value="{{ old('interest') ?? $personalProfile->interest }}">
+                        value="{{ old('interest') ?? $profiles->interest ?? '' }}">
                     <p class="text-xs italic text-black">Pisahkan dengan tanda koma(,)</p>
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="bio">Bio:</label>
                     <textarea class="form-control" name="bio" id="bio" rows="5"
-                        placeholder="Tulis sesuatu tentang dirimu ...">{{ old('bio') ?? $personalProfile->bio }}</textarea>
+                        placeholder="Tulis sesuatu tentang dirimu ...">{{ old('bio') ?? $profiles->bio ?? '' }}</textarea>
                     <p class="text-xs italic text-black">Jumlah karakter: <span id="char">0</span> Pastikan tidak lebih
                         dari
                         255 karakter.</p>
@@ -77,43 +77,43 @@
                     <label class="form-label" for="twitter">Twitter:</label>
                     <input class="form-control" type="text" name=" twitter" id="twitter"
                         placeholder="https://twitter.com/john_doe"
-                        value="{{ old('twitter') ?? $socialMediaProfile->twitter }}">
+                        value="{{ old('twitter') ?? $profiles->twitter ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="instagram">Instagram:</label>
                     <input class="form-control" type="text" name=" instagram" id="instagram"
                         placeholder="https://instagram.com/john_doe"
-                        value="{{ old('instagram') ?? $socialMediaProfile->instagram }}">
+                        value="{{ old('instagram') ?? $profiles->instagram ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="facebook">Facebook:</label>
                     <input class="form-control" type="text" name="facebook" id="facebook"
                         placeholder="https://www.facebook.com/john_doe"
-                        value="{{ old('facebook') ?? $socialMediaProfile->facebook }}">
+                        value="{{ old('facebook') ?? $profiles->facebook ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="tiktok">TikTok</label>
                     <input class="form-control" type="text" name="tiktok" id="tiktok"
                         placeholder="https://www.tiktok.com/@john_doe"
-                        value="{{ old('tiktok') ?? $socialMediaProfile->tiktok }}">
+                        value="{{ old('tiktok') ?? $profiles->tiktok ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="youtube">YouTube:</label>
                     <input class="form-control" type="text" name="youtube" id="youtube"
                         placeholder="https://www.youtube.com/channel/AxzlkKmLvvN123bbN"
-                        value="{{ old('youtube') ?? $socialMediaProfile->youtube }}">
+                        value="{{ old('youtube') ?? $profiles->youtube ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="linkedin">LinkedIn:</label>
                     <input class="form-control" type="text" name="linkedin" id="linkedin"
                         placeholder="https://www.linkedin.com/in/john-doe-123as456"
-                        value="{{ old('linkedin') ?? $socialMediaProfile->linkedin }}">
+                        value="{{ old('linkedin') ?? $profiles->linkedin ?? '' }}">
                 </div>
                 <div class="form-col">
                     <label class="form-label" for="github">GitHub:</label>
                     <input class="form-control" type="text" name="github" id="github"
                         placeholder="https://www.github.com/john_doe"
-                        value="{{ old('github') ?? $socialMediaProfile->github }}">
+                        value="{{ old('github') ?? $profiles->github ?? '' }}">
                 </div>
             </fieldset>
             <button class="btn-primary w-full"><i

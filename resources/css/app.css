@@ -93,7 +93,7 @@ blockquote {
     }
 
     .dashboard-content {
-      @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-2/3 mx-auto lg:py-8 xl:px-10 lg:max-h-screen lg:overflow-auto;
+      @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-2/3 mx-auto lg:py-8 xl:px-10 xl:max-h-screen xl:overflow-auto;
     }
 
     /* Style for buttons */
@@ -131,7 +131,7 @@ blockquote {
     }
 
     .btn-wrapper {
-      @apply flex flex-col md:flex-row gap-1 items-center justify-center py-1 w-fit mx-auto
+      @apply flex flex-col md:flex-row gap-1 items-stretch md:items-center justify-center py-1 w-fit mx-auto
     }
 
     /* Style for modal */

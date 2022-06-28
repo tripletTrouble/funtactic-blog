@@ -49,6 +49,21 @@ class ArticleRepository
     public function updateArticle (array $data): int
     {
         $article = Article::where('uuid', $data['uuid'])->first();
+
+        // Update status only
+        if ($data['published'] != null){
+            if ($article->is_published && $data['published'] == 0){
+                $article->published_at = null;
+                $article->save();
+                return $article->id;
+            }else if (! $article->is_published && $data['published'] == 1){
+                $article->published_at = Carbon::now();
+                $article->save();
+                return $article->id;
+            }
+        }
+
+        // Update all attribute
         $article->category_id = $data['category_id'];
         $article->title = $data['title'];
         $article->slug = Str::slug($data['title'],);

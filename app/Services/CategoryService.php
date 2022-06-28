@@ -27,9 +27,13 @@ class CategoryService implements CategoryServiceInterface
         }
     }
 
-    public function get($perPage): LengthAwarePaginator
+    public function get(int $perPage = 0): mixed
     {
-        return $this->categoryRepository->getCategories()->paginate($perPage);
+        if($perPage === 0){
+            return $this->categoryRepository->getCategories()->get();
+        }else {
+            return $this->categoryRepository->getCategories()->paginate($perPage);
+        }
     }
 
     public function find(string $query): Category

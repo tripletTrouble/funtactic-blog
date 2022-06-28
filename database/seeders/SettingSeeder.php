@@ -20,6 +20,10 @@ class SettingSeeder extends Seeder
             'value' => 'Example Blog'
         ]);
         DB::table('settings')->insert([
+            'key' => 'site_logo',
+            'value' => null
+        ]);
+        DB::table('settings')->insert([
             'key' => 'site_description',
             'value' => "Let's write something great!"
         ]);

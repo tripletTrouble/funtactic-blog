@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Facades\Articles;
 use App\Models\Article;
 use App\Models\Category;
+use App\Facades\Articles;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\DeleteArticleRequest;
@@ -85,7 +86,7 @@ class ArticleController extends Controller
     public function update(UpdateArticleRequest $request, string $uuid)
     {
         Articles::update($request->merge(['uuid' => $uuid]));
-        return redirect()->to(url('/articles'))->with('success', 'Artikel telah diperbarui!');
+        return back()->with('success', 'Artikel telah diperbarui!');
     }
 
     /**
@@ -94,9 +95,9 @@ class ArticleController extends Controller
      * @param  \App\Http\DeleteArticleRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeleteArticleRequest $request)
+    public function destroy(string $uuid)
     {
-        $this->articleService->deleteArticle($request['id']);
-        return redirect()->to(url('/articles'));
+        Articles::delete($uuid);
+        return back()->with('success', 'Artikel telah dihapus!');
     }
 }

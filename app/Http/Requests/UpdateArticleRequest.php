@@ -28,21 +28,27 @@ class UpdateArticleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => [
-                'required',
-                Rule::unique('articles')->ignore($this->id),
-                'string',
-                'min:10',
-                'max:255'
-            ],
-            'uuid' => 'required|exists:articles,uuid',
-            'category_id' => 'required|integer|exists:categories,id',
-            'excerpt' => 'required|string|min:10|max:255',
-            'body' => 'required|string',
-            'tags' => 'nullable|string|max:255',
-            'thumbnail_image' => 'nullable|image|file|max:400|dimensions:max_width=1280,max_height=720',
-            'thumbnail_credit' => 'nullable|string|min:10|max:255',
-        ];
+        if ($this->has('published')) {
+            return [
+                'published' => 'required'
+            ];
+        } else {
+            return [
+                'title' => [
+                    'required',
+                    Rule::unique('articles')->ignore($this->id),
+                    'string',
+                    'min:10',
+                    'max:255'
+                ],
+                'uuid' => 'required|exists:articles,uuid',
+                'category_id' => 'required|integer|exists:categories,id',
+                'excerpt' => 'required|string|min:10|max:255',
+                'body' => 'required|string',
+                'tags' => 'nullable|string|max:255',
+                'thumbnail_image' => 'nullable|image|file|max:400|dimensions:max_width=1280,max_height=720',
+                'thumbnail_credit' => 'nullable|string|min:10|max:255',
+            ];
+        }
     }
 }

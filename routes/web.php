@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserProfileController;
 
 /*
@@ -22,10 +23,12 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', function () {
-    return view('admin-panel.dashboard');
-});
+    return view('admin-panel.dashboard', [
+        'user' => Auth::user()
+    ]);
+})->middleware(['auth']);
 
-Route::controller(ArticleController::class)->group(function () {
+Route::controller(ArticleController::class)->middleware(['auth'])->group(function () {
     Route::get('/articles', 'index');
     Route::get('/new-article', 'create');
     Route::get('/articles/{uuid}/edit', 'edit');
@@ -34,20 +37,20 @@ Route::controller(ArticleController::class)->group(function () {
     Route::delete('/articles/{uuid}', 'destroy');
 });
 
-Route::controller(CategoryController::class)->group(function() {
+Route::controller(CategoryController::class)->middleware(['auth'])->group(function() {
     Route::get('/categories', 'index');
     Route::post('/categories', 'store');
     Route::put('/categories/{uuid}', 'update');
     Route::delete('/categories/{uuid}', 'destroy');
 });
 
-Route::controller(SettingController::class)->group(function() {
+Route::controller(SettingController::class)->middleware(['auth'])->group(function() {
     Route::get('site-settings', 'siteSettings');
     Route::get('menu-settings', 'menuSettings');
     Route::put('settings', 'update');
 });
 
-Route::controller(UserProfileController::class)->group(function () {
-    Route::get('edit-profile', 'edit');
-    Route::put('user-profiles', 'update');
+Route::controller(UserProfileController::class)->middleware(['auth'])->group(function () {
+    Route::get('users/{uuid}/profiles', 'edit');
+    Route::put('users/{uuid}/profiles', 'update');
 });

@@ -16,10 +16,5 @@ class UserProfileSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_profiles')->insert ([
-            'user_id' => 1,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
     }
 }

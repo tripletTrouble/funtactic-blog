@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\SettingService;
 use App\Services\CategoryService;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('categories', function () {
             return new CategoryService;
+        });
+        $this->app->bind('settings', function () {
+            return new SettingService;
         });
     }
 

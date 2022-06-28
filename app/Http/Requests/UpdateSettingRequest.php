@@ -18,6 +18,7 @@ class UpdateSettingRequest extends FormRequest
         if ($this->has('site_name')){
             return [
                 'site_name' => 'required|string|max:255',
+                'site_logo' => 'nullable|file|image|dimensions:max_width=520,max_height=520|max:400',
                 'site_description' => 'required|string|max:255'
             ];
         }elseif ($this->has('menu_1')){

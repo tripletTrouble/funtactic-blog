@@ -24,20 +24,31 @@
             <div class="form-col">
                 <label class="form-label" for="site_name">Nama Situs:</label>
                 <input class="form-control" type="text" name="site_name" id="site_name"
-                    value="{{ old('site_name') ?? $settings[0]['value'] }}">
+                    value="{{ old('site_name') ?? $settings['site_name'] }}">
             </div>
             <div class="form-col">
                 <label class="form-label" for="site_logo">Logo Situs:</label>
-                <input class="form-control" type="file" name="site_logo" id="site_logo">
+                <input class="form-control" type="file" name="site_logo" id="site_logo" onchange="loadFile(event)">
+                <img class="w-20 h-20 rounded-full border text-center text-xs" id="preview-image"
+                    src="{{ $settings['site_logo'] ?? asset('img/logo.svg') }}" alt="Logo">
+                <script>
+                    var loadFile = function(event) {
+                        var reader = new FileReader();
+                        reader.onload = function() {
+                            var output = document.getElementById('preview-image');
+                            output.src = reader.result;
+                        };
+                        reader.readAsDataURL(event.target.files[0]);
+                    };
+                </script>
             </div>
             <div class="form-col">
                 <label class="form-label" for="site_description">Deskripsi Situs:</label>
-                <textarea class="form-control" name="site_description" id="site_description" rows="5">{{ old('site_description') ?? $settings[1]['value'] }}</textarea>
+                <textarea class="form-control" name="site_description" id="site_description" rows="5">{{ old('site_description') ?? $settings['site_description'] }}</textarea>
                 <p class="text-xs text-black">Jumlah karakter: <span id="char_sum">0</span> (Pastikan tidak lebih dari 255
                     karakter)</p>
             </div>
-            <button class="btn-primary w-full" type="submit"><i
-                    class="bi bi-arrow-repeat"></i> Update</button>
+            <button class="btn-primary w-full" type="submit"><i class="bi bi-arrow-repeat"></i> Update</button>
         </form>
     </div>
     <script>

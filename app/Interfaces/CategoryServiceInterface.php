@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface CategoryServiceInterface
 {
     public function store (Request $request): void;
-    public function get ($perPage): LengthAwarePaginator;
+    public function get (int $perPage): mixed;
     public function find(string $query): Category;
     public function update(Request $request): void;
     public function delete(string $uuid): void;

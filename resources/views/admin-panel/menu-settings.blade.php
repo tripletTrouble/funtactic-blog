@@ -27,7 +27,7 @@
                 <select class="form-control" name="menu_1" id="menu_1">
                     <option selected disabled> -- Pilih Menu 1 -- </option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category['id'] }}" @selected($settings[0]['value'] == $category['id'])>{{ $category['name'] }}
+                        <option value="{{ $category['id'] }}" @selected($menus['menu_1'] == $category['id'])>{{ $category['name'] }}
                         </option>
                     @endforeach
                 </select>
@@ -37,7 +37,7 @@
                 <select class="form-control" name="menu_2" id="menu_2">
                     <option selected disabled> -- Pilih Menu 2 -- </option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category['id'] }}" @selected($settings[1]['value'] == $category['id'])>{{ $category['name'] }}
+                        <option value="{{ $category['id'] }}" @selected($menus['menu_2'] == $category['id'])>{{ $category['name'] }}
                         </option>
                     @endforeach
                 </select>
@@ -47,7 +47,7 @@
                 <select class="form-control" name="menu_3" id="menu_3">
                     <option selected disabled> -- Pilih Menu 3 -- </option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category['id'] }}" @selected($settings[2]['value'] == $category['id'])>{{ $category['name'] }}
+                        <option value="{{ $category['id'] }}" @selected($menus['menu_3'] == $category['id'])>{{ $category['name'] }}
                         </option>
                     @endforeach
                 </select>
@@ -57,7 +57,7 @@
                 <select class="form-control" name="menu_4" id="menu_4">
                     <option selected disabled> -- Pilih Menu 4 -- </option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category['id'] }}" @selected($settings[3]['value'] == $category['id'])>{{ $category['name'] }}
+                        <option value="{{ $category['id'] }}" @selected($menus['menu_4'] == $category['id'])>{{ $category['name'] }}
                         </option>
                     @endforeach
                 </select>

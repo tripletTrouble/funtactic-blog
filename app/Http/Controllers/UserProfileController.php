@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Interfaces\UserProfileRepositoryInterface;
-use App\Models\UserProfile;
-use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserProfile  $userProfile
+     * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserProfile $userProfile)
+    public function edit()
     {
         return view('admin-panel.user-profile', [
-            'personalProfile' => $this->userProfileRepository->getPersonalProfile(1),
-            'socialMediaProfile' => $this->userProfileRepository->getSocialMediaProfile(1)
+            'profiles' => Auth::user()->userProfile,
         ]);
     }
 
@@ -27,7 +24,6 @@ class UserProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateProfileRequest  $request
-     * @param  \App\Models\UserProfile  $userProfile
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProfileRequest $request)

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
+use App\Facades\Settings;
+use App\Facades\Categories;
 use App\Http\Requests\UpdateSettingRequest;
-use App\Interfaces\CategoryRepositoryInterface;
-use App\Interfaces\SettingRespositoryInterface;
 
 class SettingController extends Controller
 {
@@ -18,7 +16,7 @@ class SettingController extends Controller
     public function siteSettings()
     {
         return view('admin-panel.site-settings', [
-            'settings' => $this->settingRespository->getSettings()->only([1, 2])
+            'settings' => Settings::identities()
         ]);
     }
 
@@ -30,8 +28,8 @@ class SettingController extends Controller
     public function menuSettings()
     {
         return view('admin-panel.menu-settings', [
-            'categories' => $this->categoryRepository->getCategories(),
-            'settings' => $this->settingRespository->getSettings()->only([3, 4, 5, 6])
+            'categories' => Categories::get(),
+            'menus' => Settings::menus()
         ]);
     }
 
@@ -43,7 +41,7 @@ class SettingController extends Controller
      */
     public function update(UpdateSettingRequest $request)
     {
-        $this->settingRespository->updateSetting($request->except(['_token', '_method']));
-        return redirect()->back()->with('success', 'Pengaturan berhasil diperbarui!');
+        Settings::update($request);
+        return back()->with('success', 'Pengaturan berhasil diperbarui!');
     }
 }
