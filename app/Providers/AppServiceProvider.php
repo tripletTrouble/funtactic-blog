@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Services\SettingService;
 use App\Services\CategoryService;
+use App\Services\UserProfileService;
+use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->bind('settings', function () {
             return new SettingService;
+        });
+        $this->app->bind('userprofiles', function () {
+            return new UserProfileService;
+        });
+        $this->app->bind('users', function () {
+            return new UserService;
         });
     }
 

@@ -1,11 +1,11 @@
 <?php
 
+use App\Facades\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('dashboard', function () {
-    return view('admin-panel.dashboard', [
-        'user' => Auth::user()
-    ]);
+    return view('admin-panel.dashboard');
 })->middleware(['auth']);
 
 Route::controller(ArticleController::class)->middleware(['auth'])->group(function () {
@@ -50,7 +48,10 @@ Route::controller(SettingController::class)->middleware(['auth'])->group(functio
     Route::put('settings', 'update');
 });
 
-Route::controller(UserProfileController::class)->middleware(['auth'])->group(function () {
-    Route::get('users/{uuid}/profiles', 'edit');
-    Route::put('users/{uuid}/profiles', 'update');
+Route::prefix('user')->middleware(['auth'])->group(function () {
+    Route::get('profile', 'App\Http\Controllers\UserProfileController@edit');
+    Route::put('profile', 'App\Http\Controllers\UserProfileController@update');
+    Route::get('credential', function () {
+        return view('admin-panel.user-credential');
+    });
 });

@@ -34,7 +34,7 @@ class UserProfile extends Model
     protected function profilePhotoUrl(): Attribute
     {
         return new Attribute(
-            get: fn () => asset('storage/' . $this->profile_photo),
+            get: fn () => ($this->profile_photo != null) ? asset('storage/' . $this->profile_photo) : null,
         );
     }
 }

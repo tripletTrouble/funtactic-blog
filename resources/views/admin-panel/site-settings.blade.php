@@ -29,6 +29,7 @@
             <div class="form-col">
                 <label class="form-label" for="site_logo">Logo Situs:</label>
                 <input class="form-control" type="file" name="site_logo" id="site_logo" onchange="loadFile(event)">
+                <p class="text-xs italic">Ukuran maks. 520 x 520 px (persegi) dan tidak lebih dari 400kb.</p>
                 <img class="w-20 h-20 rounded-full border text-center text-xs" id="preview-image"
                     src="{{ $settings['site_logo'] ?? asset('img/logo.svg') }}" alt="Logo">
                 <script>

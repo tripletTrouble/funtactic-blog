@@ -16,6 +16,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
+            'profile_photo' => 'nullable|file|image|max:400|dimensions:max_width:520,max_height:520',
             'born' => 'nullable|date',
             'address' => 'nullable|string|max:255',
             'interest' => 'nullable|string|max:255',

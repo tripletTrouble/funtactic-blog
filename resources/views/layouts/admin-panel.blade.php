@@ -115,9 +115,9 @@
                 </div>
                 <div class="menu-group">
                     <p class="group-name"><i class="bi bi-person-fill mr-2"></i> Akun</p>
-                    <a class="group-items" href="{{ url('edit-profile') }}"><i
+                    <a class="group-items" href="{{ url('user/profile') }}"><i
                             class="bi bi-person-lines-fill mr-1.5"></i> Profile pemilik</a>
-                    <a class="group-items" href="#"><i class="bi bi-shield-lock-fill mr-1.5"></i> Kredensial
+                    <a class="group-items" href="{{ url('user/credential') }}"><i class="bi bi-shield-lock-fill mr-1.5"></i> Kredensial
                         pemilik</a>
                 </div>
                 <div class="menu-group">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\UserProfiles;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfileRequest;
 
@@ -28,7 +29,7 @@ class UserProfileController extends Controller
      */
     public function update(UpdateProfileRequest $request)
     {
-        $this->userProfileRepository->updateUserProfile($request->except(['_token', '_method']), 1);
+        UserProfiles::update($request);
         return redirect()->back()->with('success', 'Profile telah diperbarui');
     }
 }

@@ -32,8 +32,9 @@
                     placeholder="Tulis deskripsi artikel..." value="{{ old('excerpt') ?? $article['excerpt'] }}" required>
             </div>
             <div class="form-col">
-                <label class="form-label" for="thumbnail_image">Thumbnail Image (direkomendasikan 1280x720 px):</label>
+                <label class="form-label" for="thumbnail_image">Thumbnail Image:</label>
                 <input class="form-control" type="file" name=" thumbnail_image" id="thumbnail_image" onchange="loadFile(event)">
+                <p class="text-xs italic">Ukuran maks. 1280x720 px dan tidak lebih dari 400kb.</p>
                 <img width="240" height="135" src="{{ asset('storage/' . $article['thumbnail_image']) }}" id="preview-image">
                 <script>
                     var loadFile = function(event) {

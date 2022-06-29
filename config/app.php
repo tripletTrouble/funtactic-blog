@@ -216,6 +216,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Settings' => App\Facades\Settings::class,
+        'UserProfiles' => App\Facades\UserProfiles::class,
     ])->toArray(),
 
 ];
