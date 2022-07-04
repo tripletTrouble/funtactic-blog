@@ -7,6 +7,10 @@ module.exports = {
 ],
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ['Source Sans Pro', 'ui-serif', 'system-ui','Open Sans' ,'Arial' ,'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+    },
   },
   plugins: [],
 }

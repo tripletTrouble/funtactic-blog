@@ -5,8 +5,8 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Repositories\SettingRepository;
 use App\Interfaces\SettingServiceInterface;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
-use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 use Throwable;
 
 class SettingService implements SettingServiceInterface
@@ -24,40 +24,60 @@ class SettingService implements SettingServiceInterface
         $this->menus = $this->settingRepository->getMenus();
     }
 
-    public function update(Request $request): void
+    public function hasMenu(): bool
     {
-        // Check what kind of update, identities or menus
-        if ($request->has(['site_name', 'site_description'])){
-            try {
-                $this->settingRepository->updateIdentities($request->except(['_token', '_method']));
-                $this->fileService->updateSiteLogo($request);
-            }catch (Throwable $e) {
-                report($e);
+        $result = false;
+        foreach ($this->menus as $menu){
+            if ($menu->value != null){
+                $result = true;
             }
-        }else if ($request->has('menu_1')){
-            try {
-                $this->settingRepository->updateMenus($request->except(['_token', '_method']));
-            }catch (Throwable $e) {
-                report($e);
-            }
+        }
+        return $result;
+    }
+
+    public function update(Request $request): void
+    {   
+        try {
+            $this->settingRepository->updateSettings($request->except(['_token', '_method', 'site_logo']));
+            $request->hasFile('site_logo') ? $this->fileService->updateSiteLogo($request) : null;
+        }catch (Throwable $e){
+            report($e);
         }
     }
 
-    public function menus(): array
+    public function menus()
     {
-        return [
-          'menu_1' => $this->menus[0]->value,
-          'menu_2' => $this->menus[1]->value,
-          'menu_3' => $this->menus[2]->value,
-          'menu_4' => $this->menus[3]->value,
-        ];
+        if ($this->hasMenu()){
+            $result = (object) [];
+            foreach($this->menus as $key => $menu){
+                if ($menu->value != null){
+                    $result->{$key} = (object) [
+                        'id' => $menu->value,
+                        'name' => Category::find($menu->value)->name,
+                        'link' => url('articles/categories/' . Category::find($menu->value)->slug),
+                    ];
+                }
+            }
+            return collect($result);
+        }else {
+            return (object) [];
+        }
+    }
+
+    public function resetMenus(): void
+    {
+        try {
+            $this->settingRepository->resetMenus();
+        }catch (Throwable $e) {
+            report($e);
+        }
     }
 
     public function identities(): array
     {
         return [
             'site_name' => $this->identities[0]->value,
-            'site_logo' => ($this->identities[1]->value != null) ? asset('storage/'. $this->identities[1]->value) : null,
+            'site_logo' => ($this->identities[1]->value != null) ? asset('storage/' . $this->identities[1]->value) : null,
             'site_description' => $this->identities[2]->value,
         ];
     }

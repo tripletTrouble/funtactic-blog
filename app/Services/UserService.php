@@ -19,4 +19,9 @@ class UserService implements UserServiceInterface
     {
         return $this->userRepository->getUser($id);
     }
+
+    public function owner(): User
+    {
+        return $this->userRepository->getUser(1);
+    }
 }

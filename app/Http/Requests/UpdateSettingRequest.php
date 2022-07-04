@@ -15,31 +15,13 @@ class UpdateSettingRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->has('site_name')){
-            return [
-                'site_name' => 'required|string|max:255',
-                'site_logo' => 'nullable|file|image|dimensions:max_width=520,max_height=520|max:400',
-                'site_description' => 'required|string|max:255'
-            ];
-        }elseif ($this->has('menu_1')){
-            return [
-                'menu_1' => [
-                    'integer',
-                    Rule::unique('settings', 'value')->ignore(3)
-                ],
-                'menu_2' => [
-                    'integer',
-                    Rule::unique('settings', 'value')->ignore(4)
-                ],
-                'menu_3' => [
-                    'integer',
-                    Rule::unique('settings', 'value')->ignore(5)
-                ],
-                'menu_4' => [
-                    'integer',
-                    Rule::unique('settings', 'value')->ignore(6)
-                ],
-            ];
-        }
+        return [
+            'site_name' => 'nullable|string|max:255',
+            'site_logo' => 'nullable|file|image|dimensions:max_width=520,max_height=520|max:400',
+            'site_description' => 'nullable|string|max:255',
+            'menu_1' => 'nullable|integer|exists:categories,id',
+            'menu_2' => 'nullable|integer|exists:categories,id',
+            'menu_3' => 'nullable|integer|exists:categories,id'
+        ];
     }
 }

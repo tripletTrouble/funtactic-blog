@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\Category;
 use App\Facades\Articles;
-use Illuminate\Http\Request;
+use App\Facades\Categories;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreArticleRequest;
-use App\Http\Requests\DeleteArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 
 class ArticleController extends Controller
@@ -35,7 +32,7 @@ class ArticleController extends Controller
     {
         return view('admin-panel.create-article', [
             'title' => 'Buat artikel baru',
-            'categories' => Category::all(),
+            'categories' => Categories::get(),
         ]);
     }
 
@@ -54,10 +51,10 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article  $article
+     * @param  sting  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(string $uuid)
     {
         //
     }
@@ -73,7 +70,7 @@ class ArticleController extends Controller
         return view('admin-panel.edit-article', [
             'title' => 'Sunting Artikel',
             'article' => Articles::find($uuid),
-            'categories' => Category::all()
+            'categories' => Categories::get()
         ]);
     }
 

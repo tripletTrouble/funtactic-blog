@@ -44,4 +44,15 @@ class SettingController extends Controller
         Settings::update($request);
         return back()->with('success', 'Pengaturan berhasil diperbarui!');
     }
+
+    /**
+     * Reset the site's menu list
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function resetMenus()
+    {
+        Settings::resetMenus();
+        return back()->with('success', 'Menu telah direset!');
+    }
 }

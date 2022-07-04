@@ -34,7 +34,7 @@ class FileService
     {
         $site_logo = Setting::find(2);
 
-        if (Storage::disk('public')->exists($site_logo['value']) && $request->hasFile('site_logo')){
+        if ($site_logo['value'] != null && $request->hasFile('site_logo')){
             Storage::delete($site_logo['value']);
             $site_logo->value = $request->file('site_logo')->store('site-logo');
             $site_logo->save();

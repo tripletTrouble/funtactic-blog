@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use Throwable;
+use Carbon\Carbon;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\ArticleRepository;
 use Illuminate\Database\Eloquent\Builder;
 use App\Interfaces\ArticleServiceInterface;
@@ -19,7 +21,6 @@ class ArticleService implements ArticleServiceInterface
     {
         $this->articleRepository = new ArticleRepository();
         $this->fileService = new FileService();
-        $this->perPage = 12;
     }
     
     public function store(Request $request): void
@@ -35,7 +36,15 @@ class ArticleService implements ArticleServiceInterface
 
     public function get(int $perPage): LengthAwarePaginator
     {
-        return $this->articleRepository->getArticles()->paginate($this->perPage);
+        return $this->articleRepository->getArticles()->paginate($perPage);
+    }
+
+    public function published(int $perPage): LengthAwarePaginator
+    {
+        return $this->articleRepository->getArticles()
+                ->where('published_at', '<>', null)
+                ->orWhere('published_at', '<=', Carbon::now())
+                ->paginate($perPage);
     }
 
     public function find(string $query): Article

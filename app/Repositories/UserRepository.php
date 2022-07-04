@@ -8,6 +8,6 @@ class UserRepository
 {
     public function getUser(int $id): User
     {
-        return User::find($id);
+        return User::with(['profile', 'articles'])->find($id);
     }
 }

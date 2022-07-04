@@ -25,14 +25,14 @@
                         <td class="truncate">{{ $article->category['name'] }}</td>
                         <td>
                             <div class="btn-wrapper">
-                                <a class="btn-info w-full md:w-fit"
+                                <a class="btn-info w-full md:w-fit py-1"
                                     href="{{ url('articles/' . $article['uuid'] . '/edit') }}"><i
                                         class="bi bi-pencil mr-1"></i> Ubah</a>
                                 <form class="delete-form" action="{{ url('articles/' . $article['uuid']) }}"
                                     method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn-danger w-full md:w-fit" type="submit"><i
+                                    <button class="btn-danger w-full md:w-fit py-1" type="submit"><i
                                             class="bi bi-trash mr-1"></i>
                                         Hapus</button>
                                 </form>
@@ -41,7 +41,7 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="published" value="0">
-                                        <button class="btn-warning w-full md:w-fit" type="submit"><i
+                                        <button class="btn-warning w-full md:w-fit py-1" type="submit"><i
                                                 class="bi bi-exclamation-triangle-fill mr-1"></i>
                                             Unpublish</button>
                                     </form>
@@ -50,7 +50,7 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="published" value="1">
-                                        <button class="btn-primary w-full md:w-fit" type="submit"><i
+                                        <button class="btn-primary w-full md:w-fit py-1" type="submit"><i
                                                 class="bi bi-eye-fill mr-1"></i>
                                             Publish</button>
                                     </form>
@@ -61,6 +61,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-7">
+            {{ $articles->links('pagination.simple-pagination') }}
+        </div>
     </div>
     <script>
         var deleteForms = document.getElementsByClassName('delete-form')

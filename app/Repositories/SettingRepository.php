@@ -7,35 +7,39 @@ use Illuminate\Database\Eloquent\Collection;
 
 class SettingRepository
 {
-	public function updateIdentities(array $data): void
-	{
-		$identities = Setting::get()->only([1, 3]);
-		$data_keys = array_keys($data);
+    public function updateSettings(array $data): void
+    {
+        $settings = Setting::all(['key']);
 
-		foreach ($identities as $key => $indetity){
-			$indetity->value = $data[$data_keys[$key]];
-			$indetity->save();
-		}
-	}
+        $unique_data = collect($data)->unique();
 
-	public function updateMenus(array $data): void
-	{
-		$menus = Setting::get()->only([4, 5, 6, 7]);
-		$data_keys = array_keys($data);
+        foreach($unique_data as $key => $value){
+            if ($settings->contains('key', $key)){
+                $setting = Setting::where('key', $key)->first();
+                $setting->value = $value;
+                $setting->save();
+            }
+        }
 
-		foreach ($menus as $key => $menu){
-			$menu->value = $data[$data_keys[$key]];
-			$menu->save();
-		}
-	}
+    }
 
-	public function getIndentities(): Collection
-	{
-		return Setting::get()->only([1, 2, 3]);
-	}
+    public function resetMenus(): void
+    {
+        $menus = Setting::get()->only([4, 5, 6]);
 
-	public function getMenus(): Collection
-	{
-		return Setting::get()->only([4, 5, 6, 7]);
-	}
+        foreach ($menus as $menu) {
+            $menu->value = null;
+            $menu->save();
+        }
+    }
+
+    public function getIndentities(): Collection
+    {
+        return Setting::get()->only([1, 2, 3]);
+    }
+
+    public function getMenus(): Collection
+    {
+        return Setting::get()->only([4, 5, 6]);
+    }
 }

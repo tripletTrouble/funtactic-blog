@@ -28,7 +28,10 @@ class ArticleRepository
 
     public function getArticles(): Builder
     {
-        return Article::latest();
+        return Article::with([
+            'user.profile', 
+            'category'])
+            ->latest();
     }
 
     /**
@@ -41,9 +44,9 @@ class ArticleRepository
     public function getArticle(string $query): Article
     {
         if (Str::isUuid($query)){
-            return Article::where('uuid', $query)->first();
+            return Article::with(['user', 'category'])->where('uuid', $query)->first();
         }
-        return Article::where('slug', $query)->first();
+        return Article::with(['user', 'category'])->where('slug', $query)->first();
     }
 
     public function updateArticle (array $data): int
@@ -51,7 +54,7 @@ class ArticleRepository
         $article = Article::where('uuid', $data['uuid'])->first();
 
         // Update status only
-        if ($data['published'] != null){
+        if (isset($data['published'])){
             if ($article->is_published && $data['published'] == 0){
                 $article->published_at = null;
                 $article->save();

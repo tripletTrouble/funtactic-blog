@@ -32,19 +32,19 @@
                 @foreach ($categories as $category)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $category['name'] }}</td>
-                        <td>{{ $category['description'] }}</td>
+                        <td class="truncate">{{ $category['name'] }}</td>
+                        <td class="truncate">{{ $category['description'] }}</td>
                         <td>
                             @if ($category['id'] !== 1)
                                 <div class="btn-wrapper">
-                                    <button class="btn-info" onclick="showEditForm('{{ $category['uuid'] }}')"><i
+                                    <button class="btn-info py-1" onclick="showEditForm('{{ $category['uuid'] }}')"><i
                                             class="bi bi-pencil mr-1"></i>
                                         Ubah</button>
                                     <form class="delete-form" action="{{ url('categories/' . $category['uuid']) }}"
                                         method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn-danger" type="submit"><i class="bi bi-trash-fill"></i>
+                                        <button class="btn-danger py-1" type="submit"><i class="bi bi-trash-fill"></i>
                                             Hapus</button>
                                     </form>
                                 </div>
@@ -95,6 +95,9 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="mt-7">
+        {{ $categories->links('pagination.simple-pagination') }}
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script>

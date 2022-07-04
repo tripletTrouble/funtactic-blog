@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('excerpt');
             $table->mediumText('body');
             $table->string('tags')->nullable();
-            $table->string('thumbnail_image');
-            $table->string('thumbnail_credit');
-            $table->timestamp('published_at');
+            $table->string('thumbnail_image')->nullable();
+            $table->text('thumbnail_credit')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

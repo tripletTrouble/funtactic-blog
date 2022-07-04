@@ -34,8 +34,8 @@
                 <label class="form-label" for="thumbnail_image">Thumbnail Image:</label>
                 <input class="form-control" type="file" name=" thumbnail_image" id="thumbnail_image" required
                     onchange="loadFile(event)">
-                <p class="text-xs italic">Ukuran maks. 1280x720 px dan tidak lebih dari 400kb.</p>
-                <img class="border" width="240" height="135" src="" alt="Thumbnail preview" id="preview-image">
+                <p class="text-xs italic dark:text-white">Ukuran maks. 1280x720 px dan tidak lebih dari 400kb.</p>
+                <img class="border dark:text-white" width="240" height="135" src="" alt="Thumbnail preview" id="preview-image">
                 <script>
                     var loadFile = function(event) {
                         var reader = new FileReader();

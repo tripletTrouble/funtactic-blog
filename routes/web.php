@@ -1,7 +1,7 @@
 <?php
 
-use App\Facades\Users;
-use Illuminate\Support\Facades\Auth;
+use App\Facades\Articles;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SettingController;
@@ -18,8 +18,21 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('front-page.home');
+Route::get('/', function (Request $request) {
+    if ($request->wantsJson()){
+        return response()->json(Articles::published(12));
+    }
+    return view('front-page.home', [
+        'title' => 'Homepage',
+        'articles' => Articles::published(12)
+    ]);
+});
+
+Route::get('/articles/{slug}', function (string $slug) {
+    return view('front-page.article', [
+        'title' => Articles::find($slug)['title'],
+        'article' => Articles::find($slug)
+    ]);
 });
 
 Route::get('dashboard', function () {
@@ -46,6 +59,7 @@ Route::controller(SettingController::class)->middleware(['auth'])->group(functio
     Route::get('site-settings', 'siteSettings');
     Route::get('menu-settings', 'menuSettings');
     Route::put('settings', 'update');
+    Route::post('settings/reset-menu', 'resetMenus');
 });
 
 Route::prefix('user')->middleware(['auth'])->group(function () {

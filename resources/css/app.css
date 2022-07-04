@@ -21,29 +21,76 @@
 }
 
 /* Style for article section */
-h1 {
-  font-size: 20px;
-  font-weight: bold;
+#preview h1, article h1 {
+  @apply font-bold text-xl md:text-2xl xl:text-3xl text-sky-500 dark:text-sky-400
 }
 
-ul {
-  list-style: disc;
-  padding-left: 20px;
+#preview h2, article h2 {
+  @apply font-bold text-xl xl:text-2xl 2xl:text-3xl text-sky-500 dark:text-sky-400
 }
 
-ol {
-  list-style: decimal;
-  padding-left: 20px
+#preview h3, article h3 {
+  @apply font-bold text-lg xl:text-xl 2xl:text-3xl text-sky-500 dark:text-sky-400
 }
 
-blockquote {
-  border-left: 5px solid black;
-  padding-left: 15px;
-  padding-bottom: 8px;
-  padding-top: 8px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  font-style: italic;
+#preview h4, article h4 {
+  @apply font-bold text-lg 2xl:text-xl text-sky-500 dark:text-sky-400
+}
+
+#preview h5, article h5 {
+  @apply font-bold text-lg text-sky-500 dark:text-sky-400
+}
+
+#preview h6, article h6 {
+  @apply italic text-lg text-sky-500 dark:text-sky-400
+}
+
+article {
+  @apply dark:text-white 2xl:text-lg
+}
+
+article>img {
+  @apply block mt-2 px-3
+}
+
+#preview>p, article>section>p{
+  @apply leading-relaxed mt-5 dark:text-white
+}
+
+#preview>h2, article>section>h2{
+  @apply pt-10
+}
+
+#preview>h3, article>section>h3{
+  @apply pt-8
+}
+
+#preview>h4, article>section>h4{
+  @apply pt-6
+}
+
+#preview>h5, article>section>h5{
+  @apply pt-4
+}
+
+#preview>h6, article>section>h6{
+  @apply pt-2
+}
+
+#profile-photo{
+  border-radius: 100%;
+}
+
+#preview ul, article ul {
+  @apply list-disc pl-5 mb-5
+}
+
+#preview ol, article ol {
+  @apply list-decimal pl-5 mb-5
+}
+
+#preview blockquote, article blockquote {
+  @apply pl-3 py-1 border-l-[4px] border-black italic dark:border-white mb-7 mt-7
 }
 
 @layer components {
@@ -53,11 +100,11 @@ blockquote {
     }
 
     .group-name {
-      @apply text-base lg:text-lg text-rose-600 dark:text-rose-500 font-bold;
+      @apply text-base lg:text-lg text-sky-500 dark:text-sky-400 font-bold;
     }
 
     .group-items {
-      @apply ml-10 text-sm lg:text-sm text-rose-600 dark:text-rose-500 pb-2 border-b border-rose-500;
+      @apply ml-10 text-sm lg:text-sm text-sky-500 dark:text-sky-400 pb-2 border-b border-sky-400;
     }
 
 
@@ -67,33 +114,33 @@ blockquote {
     }
 
     .form-label {
-      @apply text-xs lg:text-sm text-rose-600 dark:text-rose-500
+      @apply text-xs lg:text-sm text-sky-500 dark:text-sky-400
     }
 
     .form-control {
-      @apply text-xs lg:text-sm text-rose-600 dark:text-rose-500 p-2 border border-rose-600 dark:border-rose-500 bg-transparent rounded-lg placeholder:text-slate-800 placeholder:opacity-50;
+      @apply text-xs lg:text-sm text-sky-500 dark:text-sky-400 p-2 border border-sky-500 dark:border-sky-400 bg-transparent rounded-lg placeholder:text-slate-800 dark:placeholder:text-white placeholder:opacity-50;
     }
 
     .text-control {
-      @apply text-xs lg:text-sm border border-rose-600 dark:border-rose-500 text-rose-600 dark:text-rose-500 rounded-lg mx-auto block p-5 w-11/12 placeholder:text-slate-800 placeholder:opacity-50
+      @apply text-xs lg:text-sm border border-sky-500 dark:border-sky-400 text-sky-500 dark:text-sky-400 bg-transparent  rounded-lg mx-auto block p-5 w-11/12 placeholder:text-slate-800 dark:placeholder:text-white placeholder:opacity-50
     }
 
     .text-preview {
-      @apply p-5 border rounded-lg w-11/12 mx-auto text-xs lg:text-sm h-60 overflow-auto
+      @apply p-5 border rounded-lg w-11/12 mx-auto text-xs lg:text-sm h-60 overflow-auto dark:text-white
     }
 
     input[type=file]::file-selector-button {
-      @apply bg-transparent text-rose-600 border-solid border border-rose-600 p-1 rounded-md 
+      @apply bg-transparent text-sky-500 border-solid border border-sky-500 p-1 rounded-md 
     }
 
 
     /* Style for layouts */
     .menu-title {
-      @apply text-xl lg:text-2xl 2xl:text-3xl font-bold text-center text-rose-600 mb-5
+      @apply text-xl lg:text-2xl 2xl:text-3xl font-bold text-center text-sky-500 mb-5
     }
 
     .dashboard-content {
-      @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-2/3 mx-auto lg:py-8 xl:px-10 xl:max-h-screen xl:overflow-auto;
+      @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-2/3 mx-auto lg:py-8 xl:px-10 xl:max-h-screen xl:overflow-auto bg-slate-50 dark:bg-slate-900;
     }
 
     /* Style for buttons */
@@ -113,9 +160,25 @@ blockquote {
       @apply text-xs lg:text-sm text-center p-2 rounded-lg block w-fit bg-red-600 dark:bg-red-500 text-white font-bold cursor-pointer
     }
 
+    .nav-pill{
+      @apply text-xs lg:text-sm text-center p-2 rounded-lg text-sky-500 border border-sky-500 hover:bg-sky-500 hover:text-white
+    }
+
+    .color-button, .lg-color-button{
+      @apply flex items-center gap-2 text-gray-400 cursor-pointer
+    }
+
+    .color-button.active, .lg-color-button.active{
+      @apply text-current block
+    }
+
+    .nav-pill.active{
+      @apply bg-sky-500 text-white
+    }
+
     /* Style for table */
     .table > tbody > tr {
-      @apply border-b border-rose-600
+      @apply border-b border-sky-500
     }
 
     .fw-table {
@@ -123,11 +186,11 @@ blockquote {
     }
 
     .table-head > tr > th {
-      @apply text-white bg-rose-600 p-2
+      @apply text-white bg-sky-500 p-2
     }
 
     .stripped-table > tbody > tr {
-      @apply odd:bg-rose-100 odd:bg-opacity-20
+      @apply odd:bg-rose-100 dark:odd:bg-gray-600 dark:text-white odd:bg-opacity-40
     }
 
     .btn-wrapper {
@@ -140,16 +203,16 @@ blockquote {
     }
 
     .modal-card {
-      @apply p-5 bg-white dark:bg-slate-900 border-2 border-rose-600 rounded-lg w-10/12 lg:w-1/2 2xl:w-1/3
+      @apply p-5 bg-white dark:bg-slate-900 border-2 border-sky-500 rounded-lg w-10/12 lg:w-1/2 2xl:w-1/3
     }
 
     /* Alert Component */
     .alert-error {
-      @apply border-t-4 py-3 px-5 border-red-600 bg-red-100 bg-opacity-40 text-red-500 overflow-y-auto mb-5 rounded-b-lg
+      @apply border-t-4 py-3 px-5 border-red-600 bg-red-100 text-red-500 overflow-y-auto mb-5 rounded-b-lg
     }
 
     .alert-success {
-      @apply border-t-4 py-3 px-5 border-sky-500 bg-sky-100 bg-opacity-40 text-sky-500 overflow-y-auto mb-5 rounded-b-lg
+      @apply border-t-4 py-3 px-5 border-sky-500 bg-sky-100 text-sky-500 overflow-y-auto mb-5 rounded-b-lg
     }
 
     .alert-title {
@@ -158,5 +221,54 @@ blockquote {
 
     .alert-error > .error-list {
       @apply list-disc ml-3 text-sm
+    }
+
+    /* Front Page Component */
+    .article-link {
+      @apply hover:opacity-70
+    }
+
+    .article-container {
+      @apply grid grid-cols-1 md:grid-cols-2 gap-7 xl:grid-cols-3
+    }
+
+    .article {
+      @apply mb-3 border-b p-2 relative
+    }
+
+    .article-image {
+      @apply rounded-lg
+    }
+
+    .article-title {
+      @apply font-bold mt-2 text-sky-500 truncate
+    }
+
+    .article-info {
+      @apply text-xs mt-1 dark:text-white
+    }
+
+    .article-excerpt {
+      @apply mt-3 text-sm dark:text-white
+    }
+
+    .article-category {
+      @apply  p-1 absolute top-0 left-0 text-xs 2xl:text-sm bg-sky-500 dark:bg-sky-400 text-white font-semibold
+    }
+
+    .menu-modal {
+      @apply h-screen fixed top-0 right-0 left-0 z-20 bg-gray-400 bg-opacity-50 transition-all
+    }
+
+    .vertical-menu-panel {
+      @apply flex flex-col h-full w-3/4 md:w-2/5 ml-auto bg-slate-100 dark:bg-slate-800 py-7 px-7 rounded-l-lg
+    }
+
+    .vertical-menu-panel > .menu-link {
+      @apply mb-5
+    }
+
+    .menu-link {
+      @apply text-right px-1 font-bold text-sky-500 dark:text-sky-400 border-sky-500 hover:border-b
     }
 }

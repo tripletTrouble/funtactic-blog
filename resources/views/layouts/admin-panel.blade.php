@@ -15,27 +15,34 @@
     {{-- SweetAlert --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {{-- Google Font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
+        rel="stylesheet">
+
     <title>{{ config('app.name') }} - {{ $title ?? "Let's write something great!" }}</title>
 </head>
 
 <style>
 </style>
 
-<body>
+<body class="dark:bg-gray-700">
     <header class="fixed top-0 right-0 w-screen z-10 xl:hidden">
         <div
-            class="flex justify-between items-center p-3 md:px-20 border-b-2 border-rose-600 bg-slate-100 dark:bg-gray-700">
+            class="flex justify-between items-center p-3 md:px-20 border-b-2 border-sky-500 bg-slate-100 dark:bg-gray-700">
             <div class="flex items-center" id="brand">
                 @inject('setting', 'App\Services\SettingService')
                 <img class="w-8 mr-2" id="brand-image"
                     src="{{ $setting->identities()['site_logo'] ?? asset('img/logo.svg') }}"
                     alt="{{ config('app.name') }}">
-                <p class="font-bold text-rose-600 text-lg leading-tight" id="brand-text">
+                <p class="font-bold text-sky-500 text-lg leading-tight" id="brand-text">
                     {{ $setting->identities()['site_name'] ?? config('app.name') }}
                 </p>
             </div>
             <div id="menu-panel">
-                <button class="text-3xl text-rose-600" id="menu-btn"><i class="bi bi-list"></i></button>
+                <button class="text-3xl text-sky-500" id="menu-btn"><i class="bi bi-list"></i></button>
             </div>
         </div>
     </header>
@@ -44,7 +51,7 @@
             id="menu-list" tabindex="0">
             {{ Settings::identities()['site_name'] }}
             <div class="menu-group">
-                <a class="group-name pb-2 border-b border-rose-600 w-full text-left" href="{{ url('/dashboard') }}"><i
+                <a class="group-name pb-2 border-b border-sky-500 w-full text-left" href="{{ url('/dashboard') }}"><i
                         class="bi bi-house-door-fill mr-1.5"></i> Dashboard</a>
             </div>
             <div class="menu-group">
@@ -65,15 +72,15 @@
             </div>
             <div class="menu-group">
                 <p class="group-name"><i class="bi bi-person-fill mr-2"></i> Akun</p>
-                <a class="group-items" href="{{ url('users/' . Auth::user()->uuid) . '/profiles' }}"><i class="bi bi-person-lines-fill mr-1.5"></i>
-                    Profile pemilik</a>
-                <a class="group-items" href="#"><i class="bi bi-shield-lock-fill mr-1.5"></i> Kredensial
-                    pemilik</a>
+                <a class="group-items" href="{{ url('users/' . Auth::user()->uuid) . '/profiles' }}"><i
+                        class="bi bi-person-lines-fill mr-1.5"></i>
+                    Profile</a>
+                <a class="group-items" href="#"><i class="bi bi-shield-lock-fill mr-1.5"></i> Kredensial</a>
             </div>
             <div class="menu-group">
                 <form action="{{ url('/logout') }}" method="post">
                     @csrf
-                    <button class="group-name pb-2 border-b border-rose-600 w-full text-left"><i
+                    <button class="group-name pb-2 border-b border-sky-500 w-full text-left"><i
                             class="bi bi-box-arrow-right mr-2"></i>
                         Log Out</button>
                 </form>
@@ -81,17 +88,20 @@
         </div>
     </div>
     <main class="mt-20 xl:mt-0 xl:flex xl:h-screen max-w-screen-xl mx-auto pb-5 lg:pb-0">
-        <div class="w-1/3 bg-gradient-to-br vvia-sky-200 dark:via-black from-slate-50 via-sky-100 to-white dark:from-gray-800 dark:to-slate-900 rounded-r-xl border-r-4 border-slate-500 dark:border-slate-100 hidden xl:flex flex-col items-center p-10"
+        <div class="w-1/3 bg-gradient-to-br dark:via-black from-slate-50 via-sky-100 to-white dark:from-gray-800 dark:to-slate-900 rounded-r-xl border-r-4 border-slate-500 dark:border-gray-700 hidden xl:flex flex-col items-center p-10"
             id="large-menu">
             <div class="flex items-center mb-7" id="brand">
-                <img class="w-8 mr-2" id="brand-image" src="{{ asset('img/logo.svg') }}"
-                    alt="{{ config('app.name') }}">
-                <p class="font-bold text-rose-600 text-lg lg:text-xl 2xl:text-2xl leading-tight" id="brand-text">
-                    {{ config('app.name') }}</p>
+                <img class="w-8 mr-2" id="brand-image"
+                    src="{{ $setting->identities()['site_logo'] ?? asset('img/logo.svg') }}"
+                    alt="{{ $setting->identities()['site_name'] ?? config('app.name') }}">
+                <p class="font-bold text-sky-500 text-lg lg:text-xl 2xl:text-2xl leading-tight" id="brand-text">
+                    {{ $setting->identities()['site_name'] ?? config('app.name') }}</p>
             </div>
+            <p class="mb-10 text-sm lg:text-base text-sky-500 dark:text-sky-400 font-semibold">Halo,
+                {{ Auth::user()->name }} !</p>
             <div class="flex flex-col gap-3 w-10/12">
                 <div class="menu-group">
-                    <a class="group-name border-b pb-2 border-rose-600" href="{{ url('/dashboard') }}"><i
+                    <a class="group-name border-b pb-2 border-sky-500" href="{{ url('/dashboard') }}"><i
                             class="bi bi-house-door-fill mr-1.5"></i> Dashboard</a>
                 </div>
                 <div class="menu-group">
@@ -116,17 +126,24 @@
                 <div class="menu-group">
                     <p class="group-name"><i class="bi bi-person-fill mr-2"></i> Akun</p>
                     <a class="group-items" href="{{ url('user/profile') }}"><i
-                            class="bi bi-person-lines-fill mr-1.5"></i> Profile pemilik</a>
-                    <a class="group-items" href="{{ url('user/credential') }}"><i class="bi bi-shield-lock-fill mr-1.5"></i> Kredensial
-                        pemilik</a>
+                            class="bi bi-person-lines-fill mr-1.5"></i> Profile</a>
+                    <a class="group-items" href="{{ url('user/credential') }}"><i
+                            class="bi bi-shield-lock-fill mr-1.5"></i> Kredensial</a>
                 </div>
                 <div class="menu-group">
                     <form action="{{ url('/logout') }}" method="post">
                         @csrf
-                        <button class="group-name pb-2 border-b border-rose-600 w-full text-left"><i
+                        <button class="group-name pb-2 border-b border-sky-500 w-full text-left"><i
                                 class="bi bi-box-arrow-right mr-2"></i>
                             Log Out</button>
                     </form>
+                </div>
+                <div class="text-xs text-sky-500 dark:text-sky-400">
+                    <p>Tema warna:</p>
+                    <div class="flex gap-3">
+                        <span class="color-button"><i class="bi bi-brightness-high-fill text-xl"></i> Light</span>
+                        <span class="color-button"><i class="bi bi-moon-stars-fill text-xl"></i> Dark</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,6 +166,38 @@
                 menu.classList.replace('flex', 'hidden');
             }
         })
+
+        //Script for changing color theme
+
+        // Define intial color
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        var colorButton = document.getElementsByClassName('color-button')
+
+        colorButton[0].addEventListener('click', function() {
+            this.classList.add('active')
+            this.nextElementSibling.classList.remove('active')
+            localStorage.theme = 'light'
+            document.documentElement.classList.remove('dark')
+        })
+
+        colorButton[1].addEventListener('click', function() {
+            this.classList.add('active')
+            this.previousElementSibling.classList.remove('active')
+            localStorage.theme = 'dark'
+            document.documentElement.classList.add('dark')
+        })
+
+        if (document.documentElement.classList.contains('dark')) {
+            colorButton[1].classList.add('active')
+        } else {
+            colorButton[0].classList.add('active')
+        }
     </script>
 </body>
 

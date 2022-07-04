@@ -29,7 +29,7 @@
             <div class="form-col">
                 <label class="form-label" for="site_logo">Logo Situs:</label>
                 <input class="form-control" type="file" name="site_logo" id="site_logo" onchange="loadFile(event)">
-                <p class="text-xs italic">Ukuran maks. 520 x 520 px (persegi) dan tidak lebih dari 400kb.</p>
+                <p class="text-xs italic dark:text-white">Ukuran maks. 520 x 520 px (persegi) dan tidak lebih dari 400kb.</p>
                 <img class="w-20 h-20 rounded-full border text-center text-xs" id="preview-image"
                     src="{{ $settings['site_logo'] ?? asset('img/logo.svg') }}" alt="Logo">
                 <script>
@@ -46,7 +46,7 @@
             <div class="form-col">
                 <label class="form-label" for="site_description">Deskripsi Situs:</label>
                 <textarea class="form-control" name="site_description" id="site_description" rows="5">{{ old('site_description') ?? $settings['site_description'] }}</textarea>
-                <p class="text-xs text-black">Jumlah karakter: <span id="char_sum">0</span> (Pastikan tidak lebih dari 255
+                <p class="text-xs text-black dark:text-white">Jumlah karakter: <span id="char_sum">0</span> (Pastikan tidak lebih dari 255
                     karakter)</p>
             </div>
             <button class="btn-primary w-full" type="submit"><i class="bi bi-arrow-repeat"></i> Update</button>

@@ -217,6 +217,7 @@ return [
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Settings' => App\Facades\Settings::class,
         'UserProfiles' => App\Facades\UserProfiles::class,
+        'Users' => App\Facades\Users::class,
     ])->toArray(),
 
 ];

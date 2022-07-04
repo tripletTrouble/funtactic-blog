@@ -3,11 +3,12 @@
 namespace App\Interfaces;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
 
 interface SettingServiceInterface
 {
     public function update(Request $request): void;
-    public function menus(): array;
+    public function hasMenu(): bool;
+    public function menus();
+    public function resetMenus(): void;
     public function identities(): array;
 }
