@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Article;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 
 class ArticleRepository
@@ -17,7 +16,7 @@ class ArticleRepository
         $article->category_id = $data['category_id'];
         $article->user_id = $data['user_id'];
         $article->title = $data['title'];
-        $article->slug = Str::slug($data['title'],);
+        $article->slug = Str::slug($data['title']);
         $article->excerpt = $data['excerpt'];
         $article->body = $data['body'];
         $article->tags = $data['tags'];
@@ -39,16 +38,16 @@ class ArticleRepository
 
     /**
      * Search articles using given keywords
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Builder
      */
     public function searchArticles(string $keywords): Builder
     {
         return Article::latest()->with(['user.profile', 'category'])
-            ->where('title', 'like', '%' . $keywords . '%')
-            ->orWhere('body', 'like', '%' . $keywords . '%')
-            ->orWhere('tags', 'like', '%' . $keywords . '%')
-            ->orWhere('excerpt', 'like', '%' . $keywords . '%');
+            ->where('title', 'like', '%'.$keywords.'%')
+            ->orWhere('body', 'like', '%'.$keywords.'%')
+            ->orWhere('tags', 'like', '%'.$keywords.'%')
+            ->orWhere('excerpt', 'like', '%'.$keywords.'%');
     }
 
     /**
@@ -77,7 +76,7 @@ class ArticleRepository
                 $article->save();
 
                 return $article->id;
-            } elseif (!$article->is_published && $data['published'] == 1) {
+            } elseif (! $article->is_published && $data['published'] == 1) {
                 $article->published_at = Carbon::now();
                 $article->save();
 
@@ -88,7 +87,7 @@ class ArticleRepository
         // Update all attribute
         $article->category_id = $data['category_id'];
         $article->title = $data['title'];
-        $article->slug = Str::slug($data['title'],);
+        $article->slug = Str::slug($data['title']);
         $article->excerpt = $data['excerpt'];
         $article->body = $data['body'];
         $article->tags = $data['tags'];

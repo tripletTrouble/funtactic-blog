@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Facades\Articles;
 use App\Facades\Categories;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\ArticleSearchRequest;
+use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -66,16 +66,16 @@ class ArticleController extends Controller
 
     /**
      * Display articles search result
-     * 
-     * @param Request $request
+     *
+     * @param  Request  $request
      * @return \Illuminate\Http\Response
      */
     public function search(ArticleSearchRequest $request)
     {
-        if ($request->wantsJson()){
+        if ($request->wantsJson()) {
             return Articles::search($request->input('keywords'), 12);
         }
-        
+
         return view('front-page.article-search', [
             'title' => 'Hasil Pencarian',
             'keywords' => $request->only('keywords'),

@@ -46,7 +46,7 @@ Route::prefix('articles')->group(function () {
 
     Route::get('categories/{slug}', function (string $slug) {
         return view('front-page.category', [
-            'title' => 'Kategori: ' . Categories::find($slug)->name,
+            'title' => 'Kategori: '.Categories::find($slug)->name,
             'category' => Categories::find($slug),
             'articles' => Categories::find($slug)->articles()->paginate(12),
         ]);

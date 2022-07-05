@@ -24,7 +24,7 @@ class ArticleSearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'keywords' => 'required|string|max:255'
+            'keywords' => 'required|string|max:255',
         ];
     }
 }
