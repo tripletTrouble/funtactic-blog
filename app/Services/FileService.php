@@ -7,7 +7,6 @@ use App\Models\Setting;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Throwable;
 
 class FileService
 {
@@ -19,7 +18,7 @@ class FileService
             Storage::delete($article->thumbnail_image);
             $article->thumbnail_image = $request->file('thumbnail_image')->store('thumbnail-images');
             $article->save();
-        } else if ($request->hasFile('thumbnail_image')) {
+        } elseif ($request->hasFile('thumbnail_image')) {
             $article->thumbnail_image = $request->file('thumbnail_image')->store('thumbnail-images');
             $article->save();
         }
@@ -34,25 +33,25 @@ class FileService
     {
         $site_logo = Setting::find(2);
 
-        if ($site_logo['value'] != null && $request->hasFile('site_logo')){
+        if ($site_logo['value'] != null && $request->hasFile('site_logo')) {
             Storage::delete($site_logo['value']);
             $site_logo->value = $request->file('site_logo')->store('site-logo');
             $site_logo->save();
-        }else if ($request->hasFile('site_logo')) {
+        } elseif ($request->hasFile('site_logo')) {
             $site_logo->value = $request->file('site_logo')->store('site-logo');
             $site_logo->save();
         }
     }
 
-    public function saveOrUpdateUserPhoto (Request $request, int $profile_id): void
+    public function saveOrUpdateUserPhoto(Request $request, int $profile_id): void
     {
         $user_profile = UserProfile::find($profile_id);
 
-        if ($user_profile->profile_photo != null && $request->hasFile('profile_photo')){
+        if ($user_profile->profile_photo != null && $request->hasFile('profile_photo')) {
             Storage::delete($user_profile->profile_photo);
             $user_profile->profile_photo = $request->file('profile_photo')->store('profile-photos');
             $user_profile->save();
-        }else if ($request->hasFile('profile_photo')){
+        } elseif ($request->hasFile('profile_photo')) {
             $user_profile->profile_photo = $request->file('profile_photo')->store('profile-photos');
             $user_profile->save();
         }

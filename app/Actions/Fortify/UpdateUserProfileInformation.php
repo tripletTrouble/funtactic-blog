@@ -39,6 +39,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
             ])->save();
         }
+
         return back()->with('success', 'Informasi pengguna berhasil diubah!');
     }
 

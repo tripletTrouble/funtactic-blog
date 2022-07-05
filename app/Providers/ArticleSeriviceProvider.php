@@ -8,10 +8,10 @@ use Illuminate\Support\ServiceProvider;
 class ArticleSeriviceProvider extends ServiceProvider
 {
     public array $singletons = [
-        ArticleService::class
+        ArticleService::class,
     ];
-    
-    public function provides () : array
+
+    public function provides(): array
     {
         return [CartService::class];
     }

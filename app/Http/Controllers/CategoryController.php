@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         return view('admin-panel.categories', [
             'title' => 'Daftar Kategori',
-            'categories' => Categories::get(12)
+            'categories' => Categories::get(12),
         ]);
     }
 
@@ -30,6 +30,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         Categories::store($request);
+
         return back()->with('success', 'Kategori telah dibuat!');
     }
 
@@ -54,18 +55,20 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, string $uuid)
     {
         Categories::update($request->merge(['uuid' => $uuid]));
+
         return redirect()->to(url('/categories'))->with('success', 'Kategori telah diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Http\Requests\DeleteCategoryRequest $request
+     * @param  \App\Http\Requests\DeleteCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function destroy(string $uuid)
     {
         Categories::delete($uuid);
+
         return back()->with('success', 'Kategori telah dihapus!');
     }
 }

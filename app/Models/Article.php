@@ -2,27 +2,25 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use GrahamCampbell\Markdown\Facades\Markdown;
-use IntlDateFormatter;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id','uuid','created_at','updated_at', 'published_at'];
-    
+    protected $guarded = ['id', 'uuid', 'created_at', 'updated_at', 'published_at'];
+
     protected $hidden = ['id'];
 
     protected $appends = ['is_published', 'thumbnail_url', 'creation_date', 'parsed_body'];
 
     /**
      * Method for getting article published status
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function isPublished(): Attribute
@@ -33,23 +31,23 @@ class Article extends Model
     }
 
     /**
-     * Method for getting article's thumbnail 
+     * Method for getting article's thumbnail
      * valid url.
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function thumbnailUrl(): Attribute
     {
         return new Attribute(
-            get: fn () => asset('storage/' . $this->thumbnail_image)
+            get: fn () => asset('storage/'.$this->thumbnail_image)
         );
     }
 
     /**
      * Get the created local date
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Casts\Attribute
-    */
+     */
     protected function creationDate(): Attribute
     {
         return new Attribute(
@@ -59,7 +57,7 @@ class Article extends Model
 
     /**
      * Get the parsed body
-     * 
+     *
      * @return Illuminate\Database\Eloquent\Casts\Attribute
      */
     protected function parsedBody(): Attribute

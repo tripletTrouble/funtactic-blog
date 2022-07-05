@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\SettingService;
 use App\Services\CategoryService;
+use App\Services\SettingService;
 use App\Services\UserProfileService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;

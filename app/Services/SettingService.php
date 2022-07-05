@@ -2,18 +2,22 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
-use App\Repositories\SettingRepository;
 use App\Interfaces\SettingServiceInterface;
 use App\Models\Category;
+use App\Repositories\SettingRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection as SupportCollection;
 use Throwable;
 
 class SettingService implements SettingServiceInterface
 {
     protected SettingRepository $settingRepository;
+
     protected FileService $fileService;
+
     protected Collection $identities;
+
     protected Collection $menus;
 
     public function __construct()
@@ -27,40 +31,42 @@ class SettingService implements SettingServiceInterface
     public function hasMenu(): bool
     {
         $result = false;
-        foreach ($this->menus as $menu){
-            if ($menu->value != null){
+        foreach ($this->menus as $menu) {
+            if ($menu->value != null) {
                 $result = true;
             }
         }
+
         return $result;
     }
 
     public function update(Request $request): void
-    {   
+    {
         try {
             $this->settingRepository->updateSettings($request->except(['_token', '_method', 'site_logo']));
             $request->hasFile('site_logo') ? $this->fileService->updateSiteLogo($request) : null;
-        }catch (Throwable $e){
+        } catch (Throwable $e) {
             report($e);
         }
     }
 
-    public function menus()
+    public function menus(): SupportCollection
     {
-        if ($this->hasMenu()){
+        if ($this->hasMenu()) {
             $result = (object) [];
-            foreach($this->menus as $key => $menu){
-                if ($menu->value != null){
+            foreach ($this->menus as $key => $menu) {
+                if ($menu->value != null) {
                     $result->{$key} = (object) [
                         'id' => $menu->value,
                         'name' => Category::find($menu->value)->name,
-                        'link' => url('articles/categories/' . Category::find($menu->value)->slug),
+                        'link' => url('articles/categories/'.Category::find($menu->value)->slug),
                     ];
                 }
             }
+
             return collect($result);
-        }else {
-            return (object) [];
+        } else {
+            return collect((object) []);
         }
     }
 
@@ -68,7 +74,7 @@ class SettingService implements SettingServiceInterface
     {
         try {
             $this->settingRepository->resetMenus();
-        }catch (Throwable $e) {
+        } catch (Throwable $e) {
             report($e);
         }
     }
@@ -77,7 +83,7 @@ class SettingService implements SettingServiceInterface
     {
         return [
             'site_name' => $this->identities[0]->value,
-            'site_logo' => ($this->identities[1]->value != null) ? asset('storage/' . $this->identities[1]->value) : null,
+            'site_logo' => ($this->identities[1]->value != null) ? asset('storage/'.$this->identities[1]->value) : null,
             'site_description' => $this->identities[2]->value,
         ];
     }

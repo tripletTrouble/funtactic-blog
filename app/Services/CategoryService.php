@@ -5,16 +5,15 @@ namespace App\Services;
 use App\Interfaces\CategoryServiceInterface;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Throwable;
 
 class CategoryService implements CategoryServiceInterface
 {
     protected CategoryRepository $categoryRepository;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->categoryRepository = new CategoryRepository();
     }
 
@@ -22,16 +21,16 @@ class CategoryService implements CategoryServiceInterface
     {
         try {
             $this->categoryRepository->storeCategory($request);
-        }catch (Throwable $e) {
-            report ($e);
+        } catch (Throwable $e) {
+            report($e);
         }
     }
 
     public function get(int $perPage = 0): mixed
     {
-        if($perPage === 0){
+        if ($perPage === 0) {
             return $this->categoryRepository->getCategories()->get();
-        }else {
+        } else {
             return $this->categoryRepository->getCategories()->paginate($perPage);
         }
     }
@@ -45,7 +44,7 @@ class CategoryService implements CategoryServiceInterface
     {
         try {
             $this->categoryRepository->updateCategory($request);
-        }catch (Throwable $e) {
+        } catch (Throwable $e) {
             report($e);
         }
     }
@@ -54,7 +53,7 @@ class CategoryService implements CategoryServiceInterface
     {
         try {
             $this->categoryRepository->deleteCategory($uuid);
-        }catch (Throwable $e) {
+        } catch (Throwable $e) {
             report($e);
         }
     }

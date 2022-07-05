@@ -13,14 +13,13 @@ class SettingRepository
 
         $unique_data = collect($data)->unique();
 
-        foreach($unique_data as $key => $value){
-            if ($settings->contains('key', $key)){
+        foreach ($unique_data as $key => $value) {
+            if ($settings->contains('key', $key)) {
                 $setting = Setting::where('key', $key)->first();
                 $setting->value = $value;
                 $setting->save();
             }
         }
-
     }
 
     public function resetMenus(): void

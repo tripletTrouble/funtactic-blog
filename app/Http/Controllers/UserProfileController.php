@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Facades\UserProfiles;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfileRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -17,7 +17,7 @@ class UserProfileController extends Controller
     public function edit()
     {
         return view('admin-panel.user-profile', [
-            'profiles' => Auth::user()->userProfile,
+            'profiles' => Auth::user()->profile,
         ]);
     }
 
@@ -30,6 +30,7 @@ class UserProfileController extends Controller
     public function update(UpdateProfileRequest $request)
     {
         UserProfiles::update($request);
+
         return redirect()->back()->with('success', 'Profile telah diperbarui');
     }
 }

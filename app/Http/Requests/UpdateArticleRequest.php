@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Facades\Articles;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateArticleRequest extends FormRequest
 {
@@ -17,7 +17,7 @@ class UpdateArticleRequest extends FormRequest
     {
         $this->merge([
             'uuid' => $this->route('uuid'),
-            'id' => Articles::find($this->route('uuid'))->id
+            'id' => Articles::find($this->route('uuid'))->id,
         ]);
     }
 
@@ -30,7 +30,7 @@ class UpdateArticleRequest extends FormRequest
     {
         if ($this->has('published')) {
             return [
-                'published' => 'required'
+                'published' => 'required',
             ];
         } else {
             return [
@@ -39,7 +39,7 @@ class UpdateArticleRequest extends FormRequest
                     Rule::unique('articles')->ignore($this->id),
                     'string',
                     'min:10',
-                    'max:255'
+                    'max:255',
                 ],
                 'uuid' => 'required|exists:articles,uuid',
                 'category_id' => 'required|integer|exists:categories,id',

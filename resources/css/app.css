@@ -269,6 +269,6 @@ article>img {
     }
 
     .menu-link {
-      @apply text-right px-1 font-bold text-sky-500 dark:text-sky-400 border-sky-500 hover:border-b
+      @apply text-right xl:text-lg px-1 font-bold text-sky-500 dark:text-sky-400 border-sky-500 hover:border-b
     }
 }

@@ -8,16 +8,18 @@ use Illuminate\Support\Facades\Auth;
 class UserProfileRepository
 {
     protected mixed $userProfile;
+
     protected mixed $ownerProfile;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->userProfile = UserProfile::where('user_id', Auth::id())->first() ?? false;
         $this->ownerProfile = UserProfile::where('user_id', 1)->first() ?? false;
     }
-    
+
     public function createOrUpdateUserProfile(array $data): int
     {
-        if (Auth::user()->userProfile){
+        if (Auth::user()->profile) {
             $user_profile = UserProfile::where('user_id', Auth::id())->first();
             $user_profile->first_name = $data['first_name'];
             $user_profile->last_name = $data['last_name'];
@@ -33,8 +35,9 @@ class UserProfileRepository
             $user_profile->linkedin = $data['linkedin'];
             $user_profile->github = $data['github'];
             $user_profile->save();
+
             return $user_profile->id;
-        }else {
+        } else {
             $user_profile = new UserProfile;
             $user_profile->user_id = Auth::id();
             $user_profile->first_name = $data['first_name'];
@@ -51,6 +54,7 @@ class UserProfileRepository
             $user_profile->linkedin = $data['linkedin'];
             $user_profile->github = $data['github'];
             $user_profile->save();
+
             return $user_profile->id;
         }
     }

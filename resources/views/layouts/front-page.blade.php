@@ -23,32 +23,61 @@
 </head>
 
 <body class="dark:bg-slate-900 overflow-x-hidden">
-    <header class="fixed top-0 right-0 w-screen z-10">
+    <header class="fixed top-0 right-0 w-screen z-10" id="header">
         <div
-            class="flex justify-between items-center py-3 lg:py-4 px-5 md:px-16 xl:px-24 2xl:px-48 border-b-2 bg-slate-50 border-sky-500 dark:bg-gray-800">
+            class="flex flex-wrap justify-between items-center py-3 lg:py-4 px-5 md:px-16 xl:px-24 2xl:px-48 border-b-2 bg-slate-50 border-sky-500 dark:bg-gray-800">
             <div class="flex items-center" id="brand">
                 <img class="w-8 mr-2" id="brand-image" src="{{ Settings::identities()['site_logo'] }}"
                     alt="{{ Settings::identities()['site_name'] }}">
-                <p class="font-bold text-sky-500 text-lg leading-tight" id="brand-text">
+                <p class="font-bold lg:text-xl xl:text-2xl text-sky-500 text-lg leading-tight" id="brand-text">
                     {{ Settings::identities()['site_name'] }}</p>
             </div>
-            <div class="menu-panel flex flex-col items-center">
-                <div class="hidden lg:flex items-center gap-3 xl:gap-5" id="large-menu">
-                    <a class="menu-link" href="{{ url('/') }}">Home</a>
-                    @foreach (Settings::menus() as $menu)
-                        <a class="menu-link" href="{{ $menu->link }}">{{ $menu->name }}</a>
-                    @endforeach
-                    <a class="menu-link" href="{{ url('articles/categories') }}">Semua Kategori</a>
-                    <button class="btn-info py-1 " id="search-btn"><i class="bi bi-search"></i> Search</button>
-                    <div class="dropdown flex gap-3 text-xs text-sky-500 dark:text-sky-400" id="theme-selector">
-                        <span class="lg-color-button hidden" id="light"><i class="bi bi-brightness-high-fill text-xl"></i>
+            <div class="flex flex-row gap-5 items-center" id="right-panel">
+                <div class="hidden lg:flex items-center gap-3 xl:gap-5 w-full justify-center mt-3">
+                    <form action="{{ url('articles/search') }}">
+                        <div class="flex">
+                            <input class="form-control py-1 rounded-r-none" type="search" name="keywords"
+                                id="keywords" placeholder="Cari artikel ..." value="{{ request('keywords') ?? '' }}">
+                            <button class="btn-info py-1 rounded-l-none" type="submit"><i class="bi bi-search"></i>
+                                Cari</button>
+                        </div>
+                    </form>
+                    <div class="flex flex-col text-sky-500 dark:text-sky-400">
+                        <p class="text-xs italic">Stay connected:</p>
+                        <div class="flex gap-2">
+                            <a href="{{ Users::owner()->profile->facebook ?? '#' }}" class="hover:text-white"
+                                target="{{ Users::owner()->profile->facebook ? '_blank' : '_self' }}"><i
+                                    class="bi bi-facebook"></i></a>
+                            <a href="{{ Users::owner()->profile->twitter ?? '#' }}" class="hover:text-white"
+                                target="{{ Users::owner()->profile->twitter ? '_blank' : '_self' }}"><i
+                                    class="bi bi-twitter"></i></a>
+                            <a href="{{ Users::owner()->profile->instagram ?? '#' }}" class="hover:text-white"
+                                target="{{ Users::owner()->profile->instagram ? '_blank' : '_self' }}"><i
+                                    class="bi bi-instagram"></i></a>
+                            <a href="{{ Users::owner()->profile->tiktok ?? '#' }}" class="hover:text-white"
+                                target="{{ Users::owner()->profile->tiktok ? '_blank' : '_self' }}"><i
+                                    class="bi bi-tiktok"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-xs text-sky-500 dark:text-sky-400" id="theme-selector">
+                        <span class="lg-color-button hidden" id="light"><i
+                                class="bi bi-brightness-high-fill text-xl"></i>
                             Light</span>
-                        <span class="lg-color-button hidden" id="dark"><i class="bi bi-moon-stars-fill text-xl"></i>
+                        <span class="lg-color-button hidden" id="dark"><i
+                                class="bi bi-moon-stars-fill text-xl"></i>
                             Dark</span>
                     </div>
                 </div>
                 <span class="text-xs text-sky-500 lg:hidden flex flex-col text-center cursor-pointer" id="menu-btn"><i
                         class="bi bi-three-dots text-2xl"></i> Menu</span>
+            </div>
+            <div class="hidden lg:flex items-center gap-3 xl:gap-5 w-full justify-center mt-5" id="large-menu">
+                <a class="menu-link" href="{{ url('/') }}">Home</a>
+                @foreach (Settings::menus() as $menu)
+                    <a class="menu-link" href="{{ $menu->link }}">{{ $menu->name }}</a>
+                @endforeach
+                <a class="menu-link" href="{{ url('articles/categories') }}">Semua Kategori</a>
+                <a class="menu-link" href="{{ url('/about-me') }}">Tentang Saya</a>
             </div>
         </div>
     </header>
@@ -76,21 +105,7 @@
             </div>
         </div>
     </div>
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-50 z-20 flex items-center justify-center -translate-x-full transition-all"
-        id="search-modal">
-        <div class="w-1/2 bg-white dark:bg-slate-800 px-5 py-7 rounded-lg">
-            <form action="{{ url('articles/search') }}" method="post">
-                @csrf
-                <div class="flex mx-auto w-3/4">
-                    <input class="form-control w-10/12 border py-1 px-3 rounded-r-none" type="search" name="keywords"
-                        id="keywords" placeholder="Cari artikel ...">
-                    <button class="btn-info w-2/12 rounded-l-none" type="submit"><i class="bi bi-search"></i>
-                        Cari</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <main class="mt-20 min-h-screen">
+    <main class="mt-24 lg:mt-40 min-h-screen" id="main">
         @yield('content')
     </main>
     <footer class="bg-slate-50 dark:bg-gray-800 border-t-2 border-sky-500 mt-10">
@@ -108,8 +123,6 @@
         // Script for menu button
         var menuButton = document.getElementById('menu-btn')
         var mobileMenu = document.getElementById('mobile-menu')
-        var searchModal = document.getElementById('search-modal')
-        var searchButton = document.getElementById('search-btn')
 
         var openModal = function(modal) {
             modal.classList.remove('-translate-x-full')
@@ -126,16 +139,6 @@
         mobileMenu.addEventListener('click', function(event) {
             if (event.target === this) {
                 closeModal(mobileMenu)
-            }
-        })
-
-        searchButton.addEventListener('click', function() {
-            openModal(searchModal)
-        })
-
-        searchModal.addEventListener('click', function(event) {
-            if (event.target === this) {
-                closeModal(searchModal)
             }
         })
 
@@ -187,6 +190,38 @@
                 document.getElementById('light').classList.remove('active')
                 document.getElementById('dark').classList.add('active')
             }
+        })
+
+        // Script for scrolling
+        var brand = document.getElementById('brand'),
+            rightPanel = document.getElementById('right-panel'),
+            largeMenu = document.getElementById('large-menu'),
+            mainRectInit = document.getElementById('main').getBoundingClientRect().top
+
+        if (largeMenu.offsetParent) {
+            document.addEventListener('scroll', function() {
+                if (document.getElementById('main').getBoundingClientRect().top < mainRectInit) {
+                    brand.classList.add('hidden')
+                    rightPanel.classList.add('hidden')
+                    largeMenu.classList.remove('mt-5')
+                } else if (document.getElementById('main').getBoundingClientRect().top == mainRectInit) {
+                    brand.classList.remove('hidden')
+                    rightPanel.classList.remove('hidden')
+                    largeMenu.classList.add('mt-5')
+                }
+            })
+        }
+
+        var scrollPos = 0,
+            header = document.getElementById('header')
+
+        window.addEventListener('scroll', function() {
+            if ((document.body.getBoundingClientRect()).top > scrollPos) {
+                header.classList.remove('hidden')
+            } else {
+                header.classList.add('hidden')
+            }
+            scrollPos = (document.body.getBoundingClientRect()).top
         })
     </script>
 </body>

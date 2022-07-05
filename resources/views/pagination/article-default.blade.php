@@ -30,14 +30,14 @@
                     /* html */
                     `
                     <a class="article-link" href="${'/articles/' + articles[i]['slug']}">
-                        <article class="article">
+                        <div class="article">
                             <img class="article-image" src="${articles[i]['thumbnail_url']}" alt="${articles[i]['title']}">
                             <h2 class="article-title">${articles[i]['title']}</h2>
                             <p class="article-info">${articles[i]['user']['profile']['full_name']} &bull;
                                 ${articles[i]['creation_date']}</p>
                             <p class="article-excerpt">${articles[i]['excerpt']}</p>
                             <span class="article-category">${articles[i]['category']['name']}</span>
-                        </article>
+                        </div>
                     </a>
                     `
                     /* endhtml */

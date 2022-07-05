@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Services\ArticleService;
 use Illuminate\Support\ServiceProvider;
-use App\Interfaces\ArticleServiceInterface;
 
 class ArticleServiceProvider extends ServiceProvider
 {

@@ -22,7 +22,8 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->instance(PasswordUpdateResponse::class, new class implements PasswordUpdateResponse {
+        $this->app->instance(PasswordUpdateResponse::class, new class implements PasswordUpdateResponse
+        {
             public function toResponse($request)
             {
                 return back()->with('success', 'Password telah diubah!');

@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Facades\Categories;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -18,7 +18,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         $this->merge([
             'uuid' => $this->route('uuid'),
-            'id' => Categories::find($this->route('uuid'))->id
+            'id' => Categories::find($this->route('uuid'))->id,
         ]);
     }
 
@@ -35,9 +35,9 @@ class UpdateCategoryRequest extends FormRequest
                 'required',
                 Rule::unique('categories')->ignore($this->id),
                 'min:3',
-                'max:255'
+                'max:255',
             ],
-            'description' => 'required|string'
+            'description' => 'required|string',
         ];
     }
 }

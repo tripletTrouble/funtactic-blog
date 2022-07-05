@@ -7,5 +7,6 @@ use App\Models\User;
 interface UserServiceInterface
 {
     public function find(int $id): User;
+
     public function owner(): User;
 }

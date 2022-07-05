@@ -10,6 +10,7 @@ use Throwable;
 class UserProfileService implements UserProfileServiceInterface
 {
     protected UserProfileRepository $userProfileRepository;
+
     protected FileService $fileService;
 
     public function __construct()
@@ -17,13 +18,13 @@ class UserProfileService implements UserProfileServiceInterface
         $this->userProfileRepository = new UserProfileRepository();
         $this->fileService = new FileService();
     }
-    
+
     public function update(Request $request): void
     {
         try {
             $profile_id = $this->userProfileRepository->createOrUpdateUserProfile($request->except(['_token', '_method']));
             $this->fileService->saveOrUpdateUserPhoto($request, $profile_id);
-        }catch (Throwable $e){
+        } catch (Throwable $e) {
             report($e);
         }
     }

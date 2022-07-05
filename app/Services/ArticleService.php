@@ -2,19 +2,19 @@
 
 namespace App\Services;
 
-use Throwable;
-use Carbon\Carbon;
-use App\Models\Article;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Repositories\ArticleRepository;
-use Illuminate\Database\Eloquent\Builder;
 use App\Interfaces\ArticleServiceInterface;
+use App\Models\Article;
+use App\Repositories\ArticleRepository;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Throwable;
 
 class ArticleService implements ArticleServiceInterface
 {
     protected ArticleRepository $articleRepository;
+
     protected FileService $fileService;
 
     public function __construct()
@@ -22,15 +22,15 @@ class ArticleService implements ArticleServiceInterface
         $this->articleRepository = new ArticleRepository();
         $this->fileService = new FileService();
     }
-    
+
     public function store(Request $request): void
     {
         $data = $request->except(['_token']);
         try {
             $article_id = $this->articleRepository->storeArticle($data);
             $this->fileService->saveOrUpdateArticleImage($request, $article_id);
-        } catch (throwable $e){
-            report ($e);
+        } catch (throwable $e) {
+            report($e);
         }
     }
 
@@ -52,14 +52,19 @@ class ArticleService implements ArticleServiceInterface
         return $this->articleRepository->getArticle($query);
     }
 
+    public function search(string $keywords, int $perPage = 0): LengthAwarePaginator
+    {
+        return $this->articleRepository->searchArticles($keywords)->paginate($perPage);
+    }
+
     public function update(Request $request): void
     {
         $data = $request->except(['_token', '_method']);
         try {
             $article_id = $this->articleRepository->updateArticle($data);
             $this->fileService->saveOrUpdateArticleImage($request, $article_id);
-        }catch (Throwable $e){
-            report ($e);
+        } catch (Throwable $e) {
+            report($e);
         }
     }
 
@@ -68,7 +73,7 @@ class ArticleService implements ArticleServiceInterface
         try {
             $image_path = $this->articleRepository->deleteArticle($uuid);
             $this->fileService->deleteArticleImage($image_path);
-        }catch (Throwable $e) {
+        } catch (Throwable $e) {
             report($e);
         }
     }

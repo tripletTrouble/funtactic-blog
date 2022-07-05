@@ -56,7 +56,7 @@
             </div>
             <div class="menu-group">
                 <p class="group-name"><i class="bi bi-file-earmark-post mr-2"></i> Artikel</p>
-                <a class="group-items" href="{{ url('/new-article') }}"><i class="bi bi-plus-lg mr-1.5"></i> Buat
+                <a class="group-items" href="{{ url('articles/new') }}"><i class="bi bi-plus-lg mr-1.5"></i> Buat
                     artikel</a>
                 <a class="group-items" href="{{ url('/articles') }}"><i class="bi bi-card-checklist mr-1.5"></i>
                     Kelola artikel</a>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="menu-group">
                     <p class="group-name"><i class="bi bi-file-earmark-post mr-2"></i> Artikel</p>
-                    <a class="group-items" href="{{ url('/new-article') }}"><i class="bi bi-plus-lg mr-1.5"></i>
+                    <a class="group-items" href="{{ url('articles/new') }}"><i class="bi bi-plus-lg mr-1.5"></i>
                         Buat
                         artikel</a>
                     <a class="group-items" href="{{ url('/articles') }}"><i class="bi bi-card-checklist mr-1.5"></i>

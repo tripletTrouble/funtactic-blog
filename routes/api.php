@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("categories", function (Request $request){
-    if ($request->uuid != null){
+Route::get('categories', function (Request $request) {
+    if ($request->uuid != null) {
         return response()->json(Categories::find($request->uuid), 200);
-    }else {
+    } else {
         return response()->json(Categories::get(), 200);
     }
 });
