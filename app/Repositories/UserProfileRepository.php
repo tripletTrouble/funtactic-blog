@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 use App\Models\UserProfile;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,7 @@ class UserProfileRepository
             $user_profile = UserProfile::where('user_id', Auth::id())->first();
             $user_profile->first_name = $data['first_name'];
             $user_profile->last_name = $data['last_name'];
-            $user_profile->born = $data['born'];
+            $user_profile->born = Carbon::parse($data['born']);
             $user_profile->address = $data['address'];
             $user_profile->interest = $data['interest'];
             $user_profile->bio = $data['bio'];

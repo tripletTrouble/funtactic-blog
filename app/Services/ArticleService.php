@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
-use App\Interfaces\ArticleServiceInterface;
-use App\Models\Article;
-use App\Repositories\ArticleRepository;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Throwable;
+use App\Models\Article;
+use Illuminate\Http\Request;
+use App\Repositories\ArticleRepository;
+use Illuminate\Database\Eloquent\Builder;
+use App\Interfaces\ArticleServiceInterface;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArticleService implements ArticleServiceInterface
 {
@@ -16,10 +17,13 @@ class ArticleService implements ArticleServiceInterface
 
     protected FileService $fileService;
 
+    protected Builder $articles;
+
     public function __construct()
     {
         $this->articleRepository = new ArticleRepository();
         $this->fileService = new FileService();
+        $this->articles = $this->articleRepository->getArticles();
     }
 
     public function store(Request $request): void
@@ -33,17 +37,26 @@ class ArticleService implements ArticleServiceInterface
         }
     }
 
-    public function get(int $perPage): LengthAwarePaginator
+    public function get(): Collection
     {
-        return $this->articleRepository->getArticles()->paginate($perPage);
+        return $this->articles->get();
     }
 
-    public function published(int $perPage): LengthAwarePaginator
+    public function paginate(int $perPage): LengthAwarePaginator
     {
-        return $this->articleRepository->getArticles()
-                ->where('published_at', '<>', null)
-                ->orWhere('published_at', '<=', Carbon::now())
-                ->paginate($perPage);
+        return $this->articles->paginate($perPage);
+    }
+
+    public function published()
+    {
+        $this->articles = $this->articles->where('published_at', '<>', null);
+        return $this;
+    }
+
+    public function unpublished()
+    {
+        $this->articles = $this->articles->where('published_at', null);
+        return $this;
     }
 
     public function find(string $query): Article

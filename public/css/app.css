@@ -479,8 +479,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 0.5rem;
 }
 .form-label {
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(14 165 233 / var(--tw-text-opacity));
 }
@@ -491,8 +491,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 @media (min-width: 1024px) {
 
   .form-label {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 .form-control {
@@ -502,8 +502,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(14 165 233 / var(--tw-border-opacity));
   background-color: transparent;
   padding: 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(14 165 233 / var(--tw-text-opacity));
 }
@@ -543,8 +543,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 @media (min-width: 1024px) {
 
   .form-control {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 .text-control {
@@ -558,8 +558,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(14 165 233 / var(--tw-border-opacity));
   background-color: transparent;
   padding: 1.25rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(14 165 233 / var(--tw-text-opacity));
 }
@@ -599,8 +599,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 @media (min-width: 1024px) {
 
   .text-control {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 .text-preview {
@@ -675,6 +675,7 @@ input[type=file]::file-selector-button {
 .dashboard-content {
   margin-left: auto;
   margin-right: auto;
+  min-height: 100vh;
   width: 91.666667%;
   --tw-bg-opacity: 1;
   background-color: rgb(248 250 252 / var(--tw-bg-opacity));
@@ -1239,6 +1240,9 @@ input[type=file]::file-selector-button {
 .mb-5 {
   margin-bottom: 1.25rem;
 }
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -1250,9 +1254,6 @@ input[type=file]::file-selector-button {
 }
 .mb-7 {
   margin-bottom: 1.75rem;
-}
-.mb-3 {
-  margin-bottom: 0.75rem;
 }
 .mb-12 {
   margin-bottom: 3rem;
@@ -1317,9 +1318,6 @@ input[type=file]::file-selector-button {
 .h-10 {
   height: 2.5rem;
 }
-.h-36 {
-  height: 9rem;
-}
 .h-44 {
   height: 11rem;
 }
@@ -1361,6 +1359,9 @@ input[type=file]::file-selector-button {
 .w-11\/12 {
   width: 91.666667%;
 }
+.w-44 {
+  width: 11rem;
+}
 .w-7 {
   width: 1.75rem;
 }
@@ -1379,18 +1380,6 @@ input[type=file]::file-selector-button {
 .w-1\/5 {
   width: 20%;
 }
-.w-1\/2 {
-  width: 50%;
-}
-.w-2\/12 {
-  width: 16.666667%;
-}
-.w-36 {
-  width: 9rem;
-}
-.w-44 {
-  width: 11rem;
-}
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -1407,6 +1396,12 @@ input[type=file]::file-selector-button {
 .cursor-default {
   cursor: default;
 }
+.list-decimal {
+  list-style-type: decimal;
+}
+.list-disc {
+  list-style-type: disc;
+}
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -1419,14 +1414,8 @@ input[type=file]::file-selector-button {
 .flex-wrap {
   flex-wrap: wrap;
 }
-.items-start {
-  align-items: flex-start;
-}
 .items-center {
   align-items: center;
-}
-.justify-start {
-  justify-content: flex-start;
 }
 .justify-end {
   justify-content: flex-end;
@@ -1457,20 +1446,17 @@ input[type=file]::file-selector-button {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.rounded-lg {
+  border-radius: 0.5rem;
+}
 .rounded-full {
   border-radius: 9999px;
 }
 .rounded-xl {
   border-radius: 0.75rem;
 }
-.rounded-lg {
-  border-radius: 0.5rem;
-}
 .rounded-md {
   border-radius: 0.375rem;
-}
-.rounded {
-  border-radius: 0.25rem;
 }
 .rounded-t-lg {
   border-top-left-radius: 0.5rem;
@@ -1545,6 +1531,10 @@ input[type=file]::file-selector-button {
   --tw-bg-opacity: 1;
   background-color: rgb(224 242 254 / var(--tw-bg-opacity));
 }
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
 .bg-sky-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(56 189 248 / var(--tw-bg-opacity));
@@ -1557,24 +1547,9 @@ input[type=file]::file-selector-button {
   --tw-bg-opacity: 1;
   background-color: rgb(16 185 129 / var(--tw-bg-opacity));
 }
-.bg-slate-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
-}
 .bg-slate-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(248 250 252 / var(--tw-bg-opacity));
-}
-.bg-gray-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
-}
-.bg-red-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-}
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5;
 }
 .bg-gradient-to-br {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
@@ -1627,21 +1602,21 @@ input[type=file]::file-selector-button {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
-.py-0\.5 {
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
 .py-0 {
   padding-top: 0px;
   padding-bottom: 0px;
-}
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
 }
 .py-7 {
   padding-top: 1.75rem;
@@ -1674,6 +1649,12 @@ input[type=file]::file-selector-button {
 .pb-5 {
   padding-bottom: 1.25rem;
 }
+.pl-5 {
+  padding-left: 1.25rem;
+}
+.pl-8 {
+  padding-left: 2rem;
+}
 .text-left {
   text-align: left;
 }
@@ -1696,17 +1677,17 @@ input[type=file]::file-selector-button {
   font-size: 1rem;
   line-height: 1.5rem;
 }
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 .font-semibold {
   font-weight: 600;
@@ -1791,11 +1772,6 @@ input[type=file]::file-selector-button {
 .ring-sky-300 {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(125 211 252 / var(--tw-ring-opacity));
-}
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
 }
 .transition {
   transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
@@ -2092,11 +2068,6 @@ article>img {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.hover\:text-sky-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(56 189 248 / var(--tw-text-opacity));
-}
-
 .focus\:border-blue-300:focus {
   --tw-border-opacity: 1;
   border-color: rgb(147 197 253 / var(--tw-border-opacity));
@@ -2153,14 +2124,14 @@ article>img {
   background-color: rgb(30 41 59 / var(--tw-bg-opacity));
 }
 
-.dark .dark\:bg-gray-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-}
-
 .dark .dark\:bg-slate-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+}
+
+.dark .dark\:bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:from-gray-800 {
@@ -2255,18 +2226,6 @@ article>img {
     margin-left: 0px;
   }
 
-  .md\:mt-32 {
-    margin-top: 8rem;
-  }
-
-  .md\:mt-36 {
-    margin-top: 9rem;
-  }
-
-  .md\:mt-3 {
-    margin-top: 0.75rem;
-  }
-
   .md\:w-1\/3 {
     width: 33.333333%;
   }
@@ -2332,24 +2291,8 @@ article>img {
 
 @media (min-width: 1024px) {
 
-  .lg\:static {
-    position: static;
-  }
-
-  .lg\:mt-48 {
-    margin-top: 12rem;
-  }
-
-  .lg\:mt-36 {
-    margin-top: 9rem;
-  }
-
   .lg\:mt-40 {
     margin-top: 10rem;
-  }
-
-  .lg\:mt-10 {
-    margin-top: 2.5rem;
   }
 
   .lg\:flex {
@@ -2391,6 +2334,16 @@ article>img {
     padding-bottom: 0px;
   }
 
+  .lg\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .lg\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
   .lg\:text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -2399,16 +2352,6 @@ article>img {
   .lg\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .lg\:text-xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-
-  .lg\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
   }
 }
 

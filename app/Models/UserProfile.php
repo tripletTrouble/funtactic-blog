@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,12 +20,24 @@ class UserProfile extends Model
     /**
      * Method for getting user's full name
      *
-     * @return string
+     * @return Attribute
      */
     protected function fullName(): Attribute
     {
         return new Attribute(
             get: fn () => $this->first_name.' '.$this->last_name,
+        );
+    }
+
+    /**
+     * Modify born column into Carbon Object
+     * 
+     * @return Attribute
+     */
+    protected function born(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)
         );
     }
 

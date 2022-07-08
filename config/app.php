@@ -213,6 +213,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Articles' => App\Facades\Articles::class,
+        'Categories' => App\Facades\Categories::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Settings' => App\Facades\Settings::class,
         'UserProfiles' => App\Facades\UserProfiles::class,

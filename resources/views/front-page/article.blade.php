@@ -11,6 +11,7 @@
                 <div class="flex items-center justify-center mt-5 gap-2">
                     <img class="w-7" src="{{ $article->user->profile->profile_photo_url }}" alt="{{ $article->title }}"
                         id="profile-photo">
+                        <p class="text-xs lg:text-sm">Sumber: {!! $article->thumbnail_credit !!}</p>
                     <p class="text-sm 2xl:text-base font-semibold text-sky-500 dark:text-sky-400">
                         {{ $article->user->profile->full_name }}
                         &bull; <span class="text-black dark:text-white font-normal">{{ $article->creation_date }}</span>

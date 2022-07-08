@@ -20,7 +20,7 @@ class ArticleController extends Controller
     {
         return view('admin-panel.articles', [
             'title' => 'Daftar Artikel',
-            'articles' => Articles::get(12),
+            'articles' => Articles::paginate(12),
         ]);
     }
 

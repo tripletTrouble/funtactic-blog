@@ -114,15 +114,15 @@ article>img {
     }
 
     .form-label {
-      @apply text-xs lg:text-sm text-sky-500 dark:text-sky-400
+      @apply text-sm lg:text-base text-sky-500 dark:text-sky-400
     }
 
     .form-control {
-      @apply text-xs lg:text-sm text-sky-500 dark:text-sky-400 p-2 border border-sky-500 dark:border-sky-400 bg-transparent rounded-lg placeholder:text-slate-800 dark:placeholder:text-white placeholder:opacity-50;
+      @apply text-sm lg:text-base text-sky-500 dark:text-sky-400 p-2 border border-sky-500 dark:border-sky-400 bg-transparent rounded-lg placeholder:text-slate-800 dark:placeholder:text-white placeholder:opacity-50;
     }
 
     .text-control {
-      @apply text-xs lg:text-sm border border-sky-500 dark:border-sky-400 text-sky-500 dark:text-sky-400 bg-transparent  rounded-lg mx-auto block p-5 w-11/12 placeholder:text-slate-800 dark:placeholder:text-white placeholder:opacity-50
+      @apply text-sm lg:text-base border border-sky-500 dark:border-sky-400 text-sky-500 dark:text-sky-400 bg-transparent  rounded-lg mx-auto block p-5 w-11/12 placeholder:text-slate-800 dark:placeholder:text-white placeholder:opacity-50
     }
 
     .text-preview {
@@ -140,7 +140,7 @@ article>img {
     }
 
     .dashboard-content {
-      @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-2/3 mx-auto lg:py-8 xl:px-10 xl:max-h-screen xl:overflow-auto bg-slate-50 dark:bg-slate-900;
+      @apply w-11/12 md:w-9/12 lg:w-8/12 xl:w-2/3 mx-auto lg:py-8 xl:px-10 min-h-screen xl:max-h-screen xl:overflow-auto bg-slate-50 dark:bg-slate-900;
     }
 
     /* Style for buttons */

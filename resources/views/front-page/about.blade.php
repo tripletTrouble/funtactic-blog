@@ -16,7 +16,7 @@
                 @isset(Users::owner()->profile->born)
                     <p class="dark:text-white mt-5 text-sm">
                         <i class="bi bi-balloon-fill"></i>
-                        {{ \Carbon\Carbon::parse(Users::owner()->profile->born)->isoFormat('D MMMM Y') }}
+                        {{ Users::owner()->profile->born->isoFormat('D MMMM Y') }}
                     </p>
                 @endisset
                 <p class="dark:text-white text-sm text-center">

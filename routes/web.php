@@ -21,12 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (Request $request) {
     if ($request->wantsJson()) {
-        return response()->json(Articles::published(12));
+        return response()->json(Articles::published()->paginate(12));
     }
 
     return view('front-page.home', [
         'title' => 'Homepage',
-        'articles' => Articles::published(12),
+        'articles' => Articles::published()->paginate(12),
     ]);
 });
 

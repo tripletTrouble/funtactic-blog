@@ -27,7 +27,7 @@
         <div
             class="flex flex-wrap justify-between items-center py-3 lg:py-4 px-5 md:px-16 xl:px-24 2xl:px-48 border-b-2 bg-slate-50 border-sky-500 dark:bg-gray-800">
             <div class="flex items-center" id="brand">
-                <img class="w-8 mr-2" id="brand-image" src="{{ Settings::identities()['site_logo'] }}"
+                <img class="w-8 mr-2" id="brand-image" src="{{ Settings::identities()['site_logo'] ?? asset('img/logo.svg') }}"
                     alt="{{ Settings::identities()['site_name'] }}">
                 <p class="font-bold lg:text-xl xl:text-2xl text-sky-500 text-lg leading-tight" id="brand-text">
                     {{ Settings::identities()['site_name'] }}</p>
