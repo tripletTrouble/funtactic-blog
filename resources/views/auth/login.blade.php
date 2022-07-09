@@ -30,13 +30,13 @@
                 <div class="form-col">
                     <label for="email" class="form-label">Email:</label>
                     <input type="text" name="email" id="email"
-                        class="bg-sky-100 dark:bg-gray-900 rounded-t-lg placeholder:text-sky-400 text-sky-500 focus:outline-none border-b-2 border-sky-500 p-2 text-xs lg:text-sm"
+                        class="bg-sky-100 dark:bg-gray-900 rounded-t-lg placeholder:text-sky-400 text-sky-500 focus:outline-none border-b-2 border-sky-500 p-2 text-sm lg:text-base"
                         placeholder="Your email ...">
                 </div>
                 <div class="form-col">
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" name="password" id="password"
-                        class="bg-sky-100 dark:bg-gray-900 rounded-t-lg placeholder:text-sky-400 text-sky-500 focus:outline-none border-b-2 border-sky-500 p-2 text-xs lg:text-sm"
+                        class="bg-sky-100 dark:bg-gray-900 rounded-t-lg placeholder:text-sky-400 text-sky-500 focus:outline-none border-b-2 border-sky-500 p-2 text-sm lg:text-base"
                         placeholder="Your password ...">
                 </div>
                 <button class="btn-primary w-full mt-5" type="submit"><i class="bi bi-box-arrow-in-right"></i>
